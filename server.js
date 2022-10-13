@@ -16,6 +16,10 @@ app.get("/register", function (req, res) {
   return res.render("register");
 });
 
+app.get("/profile", function (req, res) {
+  return res.render("profile");
+});
+
 app.listen(3000, function () {
   console.log("Servidor corriendo en el puerto 3000");
   console.log("http://localhost:3000");
