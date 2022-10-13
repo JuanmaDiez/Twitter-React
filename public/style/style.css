@@ -1,0 +1,18 @@
+.tweet-button {
+  background-color: #1d9bf0;
+  border-radius: 45px;
+}
+
+.follow-button {
+  background-color: #1d9bf0;
+  border-radius: 45px;
+}
+small {
+  color: #647788;
+  font-family: "Inter";
+  font-style: normal;
+}
+.information-containers {
+  background-color: #f7f9f9;
+  border-radius: 15px;
+}
