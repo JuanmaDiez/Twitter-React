@@ -2,6 +2,7 @@ const express = require("express"); // Aqui le decimos a la pagina que utilizare
 const app = express(); // Aqui guardamos dentro de la constante app las funciones de Express
 
 app.set("view engine", "ejs"); // Aqui mostramos que el motor de vistas sera EJS
+app.use(express.static("public")); // Estamos diciendo que las imagenes y los estilos los sacaremos de la carpeta Public
 
 app.get("/", function (req, res) {
   return res.render("home");
