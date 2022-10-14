@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const tweetSchema = new Schema(
   {
     content: String,
-    author: ObjectId,
-    likes: [ObjectId],
+    author: { type: Schema.Types.ObjectId, ref: "User" },
+    likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

@@ -10,9 +10,9 @@ const userSchema = new Schema(
     avatar: String,
     password: String,
     bio: String,
-    tweets: [],
-    followers: [],
-    following: [],
+    tweets: [{ type: Schema.Types.ObjectId, ref: "Tweet" }],
+    followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    following: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

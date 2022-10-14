@@ -5,8 +5,10 @@ mongoose.connection
   .once("open", () => console.log("Conexion con la base de datos establecida"))
   .on("error", () => console.log(error));
 
-//   async function dbInitialSetup(){
-//     await require("./seeders/")
-//   }
+async function dbInitialSetup() {
+  await require("./seeders/userSeeders")();
 
-module.exports = mongoose;
+  await require("./seeders/tweetSeeders")();
+}
+
+module.exports = { mongoose, dbInitialSetup };
