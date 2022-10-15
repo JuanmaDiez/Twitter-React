@@ -33,6 +33,7 @@ module.exports = async () => {
   }
 
   for (const user of users) {
+    // Aqui utilizaremos lodash (informacion en internet)
     const randomNumber = _.random(1, 5); // Aqui seleccionamos un numero random del 1 al 5
     const randomUsers = _.chain(users) // Lo usamos para concatenar varias funciones de lodash que tiene como valor incial el Array de Users
       .without(user) // Que el user no este incluido en el array al momento de hacer la funcion. Para que un usuario no pueda seguirse a si mismo
