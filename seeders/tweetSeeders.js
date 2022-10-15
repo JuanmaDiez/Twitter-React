@@ -5,7 +5,7 @@ const User = require("../models/User");
 const _ = require("lodash");
 
 module.exports = async () => {
-  /*  mongooseconnection.connection.db.dropCollection(
+  /*  mongoose.connection.db.dropCollection(
     "tweets",
     function(err, result) {
         console.log("Collection droped");
