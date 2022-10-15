@@ -18,64 +18,73 @@ small {
 }
 
 /* -------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
 
-body{
-    background-color: #0c476f;
-    height: 100vh;
+.public-body {
+  background-color: #0c476f;
+  height: 100vh;
 }
 
-:root{
-    margin:0;
-    padding: 0;
+:root {
+  margin: 0;
+  padding: 0;
 }
 
-.h1 fw-bold mb-0{
-    font-family: Inter;
-    font-style: Semi-Bold;
+.h1 fw-bold mb-0 {
+  font-family: Inter;
+  font-style: Semi-Bold;
 }
 
-#divIzq{
-    background: #1D9BF0;
-    /* border-radius: 15px 0px 0px 15px; */
+#divIzq {
+  background: #1d9bf0;
+  /* border-radius: 15px 0px 0px 15px; */
 }
 
-#buttonSignUp{   
-width: 100%;
-height: 47px;
-top: 789px;
-background: #1D9BF0;
-border-radius: 45px;
+#buttonSignUp {
+  width: 100%;
+  height: 47px;
+  top: 789px;
+  background: #1d9bf0;
+  border-radius: 45px;
 }
 
-.SignIn{
-    text-align: center;
+.SignIn {
+  text-align: center;
 }
 
-#welcome{
-    padding-top: 50rem;
-    font-family: 'Inter', sans-serif;
-    color: white;
-    font-size: 1.4rem;
-    padding-bottom: 1rem;
+#welcome {
+  padding-top: 50rem;
+  font-family: "Inter", sans-serif;
+  color: white;
+  font-size: 1.4rem;
+  padding-bottom: 1rem;
 }
 
-#logoTwitter{
-    padding-top: 3rem;
-    padding-left: 3rem;
-    height: 7rem;
-    width: 7rem;
+#logoTwitter {
+  padding-top: 3rem;
+  padding-left: 3rem;
+  height: 7rem;
+  width: 7rem;
 }
 
-.card{
-    border-radius: 1rem;
-    border-color: #0c476f;
+.card {
+  border-radius: 1rem;
+  border-color: #0c476f;
 }
 
-#welcomeHey{
-    padding-bottom: 1rem;
-    padding-top: 50rem;
-    font-family: 'Inter', sans-serif;
-    color: white;
-    font-size: 1.4rem;
+#welcomeHey {
+  padding-bottom: 1rem;
+  padding-top: 50rem;
+  font-family: "Inter", sans-serif;
+  color: white;
+  font-size: 1.4rem;
+}
+
+.profile-header {
+  background-color: #1d9bf0;
+  position: static;
+  z-index: 0;
+}
+.tweet-container {
+  border: solid 1px #eaeaea;
 }
