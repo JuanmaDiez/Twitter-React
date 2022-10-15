@@ -3,7 +3,7 @@ function login(req, res) {
 }
 
 function register(req, res) {
-  return res.render("login");
+  return res.render("register");
 }
 
 module.exports = { login, register };
