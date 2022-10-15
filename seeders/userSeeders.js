@@ -6,13 +6,11 @@ const { mongoose } = require("../db");
 faker.locale = "es";
 
 module.exports = async () => {
-    mongoose.connection.db.dropCollection(
-    "users",
-    function(err, result) {
-        console.log("Collection droped");
-    }
-); 
- 
+  // await mongoose.connection.db.dropCollection("users", function (err, result) {
+  //   console.log("Collection droped");
+  // });
+  await mongoose.connection.dropCollection("users");
+
   const users = [];
   const newUser = new User({
     firstname: "Leia",

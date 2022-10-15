@@ -18,8 +18,8 @@ module.exports = function (passport) {
       if (!user) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
-      const checkPassword = await user.passwordCheck(password);
-      if (!checkPassword) {
+
+      if (!user.password) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
       return done(null, user);
@@ -27,12 +27,12 @@ module.exports = function (passport) {
   );
 
   passport.serializeUser(function (user, done) {
-    done(null, user.id);
+    done(null, user._id);
   });
 
-  passport.deserializeUser(async function (id, done) {
+  passport.deserializeUser(async function (_id, done) {
     try {
-      const user = await User.findByPk(id);
+      const user = await User.findById(_id);
 
       done(null, user);
     } catch (error) {

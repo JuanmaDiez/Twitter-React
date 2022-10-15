@@ -5,9 +5,10 @@ const User = require("../models/User");
 const _ = require("lodash");
 
 module.exports = async () => {
-  mongoose.connection.db.dropCollection("tweets", function (err, result) {
-    console.log("Collection droped");
-  });
+  // await mongoose.connection.db.dropCollection("tweets", function (err, result) {
+  //   console.log("Collection droped");
+  // });
+  await mongoose.connection.dropCollection("tweets");
 
   const tweets = []; // creao array vacio para poner los tweets que va creando el seeder
   for (let i = 0; i < 20; i++) {
