@@ -9,7 +9,6 @@ module.exports = async () => {
   //   console.log("Collection droped");
   // });
   await mongoose.connection.dropCollection("tweets");
-
   const tweets = []; // creao array vacio para poner los tweets que va creando el seeder
   for (let i = 0; i < 20; i++) {
     //aca va a recorrer el codigo de la linea de abajo para crear 20 tweets
@@ -21,9 +20,7 @@ module.exports = async () => {
     });
     tweets.push(newTweet); // agregamos los twwits a la coleccion de tweets que habiamos creado
   }
-
   const users = await User.find(); // llenamos uns lista con todo los usarios que estan en la base de datos en la tabla Usuarios (es lo que hace el User.find())
-
   for (const tweet of tweets) {
     // recorremos la lista de tweets
     const randomUser = _.sample(users); //usamos lodash (_.sample) para seleccionar un usuario al azar de la tabla usuarios
@@ -41,6 +38,5 @@ module.exports = async () => {
       tweet.likes.push(likeUser); //agregamos al array de likes perteneciente a cada tweet cada uno de los usuarios de ese nuevo array
     }
   }
-
   await Tweet.insertMany(tweets); // le decimos al modelo Tweet que inserte en la tabla tweets de la base de datos, todos los tweets del array tweets creado anteriormente Recien aca se crea el tweet en la base de datos
 };
