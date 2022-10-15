@@ -1,5 +1,5 @@
 const LocalStrategy = require("passport-local");
-const { User } = require("../models/User");
+const User = require("../models/User");
 
 module.exports = function (passport) {
   passport.use(
@@ -18,8 +18,8 @@ module.exports = function (passport) {
       if (!user) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
-      const checkPassword = await user.passwordCheck(password);
-      if (!checkPassword) {
+
+      if (user.password !== password) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
       return done(null, user);
@@ -32,7 +32,7 @@ module.exports = function (passport) {
 
   passport.deserializeUser(async function (id, done) {
     try {
-      const user = await User.findByPk(id);
+      const user = await User.findById(id);
 
       done(null, user);
     } catch (error) {
