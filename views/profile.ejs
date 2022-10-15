@@ -15,7 +15,45 @@
   </head>
   <body>
     <div class="container d-flex">
-      <%- include("./partials/menu") %> <%- include("./partials/info") %>
+      <%- include("./partials/menu") %>
+      <div class="d-flex flex-column">
+        <header class="profile-header">
+          <img src="" alt="profile-pic" class="profile-pic" />
+        </header>
+        <button>Follow</button>
+        <h3><%= user.firstname %> <%= user.lastname %></h3>
+        <div class="d-flex">
+          <div class="d-flex justify-content-between">
+            <p>@<%= user.username %></p>
+            <div class="d-flex">
+              <p>
+                <%= user.followers.length %>
+                <a href="/profile/<%= user.id %>/followers">Followers</a>
+              </p>
+            </div>
+            <div class="d-flex">
+              <p>
+                <%= user.following.length %>
+                <a href="/profile/<%= user.id %>/following">Following</a>
+              </p>
+            </div>
+          </div>
+          <h5>Tweets</h5>
+          <% for(tweet of user.tweets) {%>
+          <div class="d-flex column">
+            <img src="" alt="" />
+            <div class="d-flex column">
+              <div class="d-flex justify-content-start">
+                <h6><%= user.firstname %> <%= user.lastname%></h6>
+                <p>@<%= user.username %></p>
+              </div>
+              <p><%= tweet.content %></p>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <%- include("./partials/info") %>
     </div>
   </body>
 </html>
