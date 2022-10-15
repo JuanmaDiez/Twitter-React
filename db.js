@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/db-twitter");
+mongoose.connect("mongodb://127.0.0.1:27017/db-twitter");
 mongoose.connection
   .once("open", () => console.log("Conexion con la base de datos establecida"))
   .on("error", () => console.log("Ha habido un error"));
