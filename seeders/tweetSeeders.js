@@ -21,6 +21,9 @@ module.exports = async () => {
   for (const tweet of tweets) {
     const randomUser = _.sample(users);
     tweet.author = randomUser;
+    await User.findByIdAndUpdate(randomUser.id, {
+      $push: { tweets: tweet.id },
+    });
   }
   await Tweet.insertMany(tweets);
 };
