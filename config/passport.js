@@ -11,7 +11,9 @@ module.exports = function (passport) {
       let user;
 
       try {
-        user = await User.findOne({ email: username });
+        user = await User.findOne({
+          $or: [{ email: username }, { username: username }],
+        });
       } catch (error) {
         return done(error);
       }
