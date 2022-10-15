@@ -7,7 +7,7 @@ publicRouter.get("/login", publicController.login);
 publicRouter.post(
   "/login",
   passport.authenticate("local", {
-    succesRedirect: "/",
+    successRedirect: "/",
     failureRedirect: "/login",
   })
 );

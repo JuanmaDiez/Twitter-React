@@ -8,6 +8,14 @@ const passportConfig = require("./config/passport");
 
 app.set("view engine", "ejs"); // Aqui mostramos que el motor de vistas sera EJS
 app.use(express.static("public")); // Estamos diciendo que las imagenes y los estilos los sacaremos de la carpeta Public
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "UnStringSecreto",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(passport.session());
 
 passportConfig(passport);
