@@ -1,7 +1,9 @@
+const Tweet = require("../models/Tweet");
 const User = require("../models/User");
 
-function index(req, res) {
-  return res.render("home");
+async function index(req, res) {
+  const tweets = await Tweet.find().populate("author");
+  return res.render("home", { tweets });
 }
 
 async function indexUser(req, res) {
