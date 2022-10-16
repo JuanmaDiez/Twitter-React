@@ -23,6 +23,7 @@
         />
         <form action="/" method="POST">
           <textarea
+            name="content"
             class="form-control textarea"
             placeholder="Whats happening?"
             id="floatingTextarea2"
@@ -32,7 +33,7 @@
         </form>
       </div>
       <div>
-        <% for(tweet of tweets) {%>
+        <% for(tweet of tweets.reverse()) {%>
         <div class="tweet-container p-4">
           <div class="d-flex">
             <img
@@ -48,6 +49,7 @@
                 <p>@<%= tweet.author.username %></p>
               </div>
               <p><%= tweet.content %></p>
+              <hr />
             </div>
           </div>
         </div>
