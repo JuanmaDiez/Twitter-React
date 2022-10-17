@@ -1,5 +1,5 @@
-.sidebar{
-  width:fit-content;
+.sidebar {
+  width: fit-content;
 }
 
 .tweet-button-menu {
@@ -93,11 +93,6 @@ small {
   font-size: 1.4rem;
 }
 
-.profile-header {
-  background-color: #1d9bf0;
-  position: static;
-  z-index: 0;
-}
 .tweet-container {
   border: solid 1px #eaeaea;
 }
@@ -142,5 +137,23 @@ small {
   text-align: center;
   color: #ffffff;
 }
-
-
+#profile-follow {
+  margin-top: 1rem;
+}
+#profile-header {
+  height: 10rem;
+  background-color: #1d9bf0;
+  position: static;
+  z-index: 0;
+}
+#profile-image {
+  border: solid 3px white;
+  border-radius: 50%;
+  z-index: 1;
+  position: relative;
+  top: 150px;
+  left: 10px;
+}
+.profile-info {
+  margin-top: 7rem;
+}
