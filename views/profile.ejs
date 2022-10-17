@@ -24,14 +24,14 @@
           <% if (profileUser.id !== user.id) { %> <% if
           (!profileUser.followers.includes(user._id)) {%>
           <form
-            action="/<% profileUser.id %>/follow?_method=PATCH"
+            action="/<%= profileUser.id %>/follow?_method=PATCH"
             method="post"
           >
             <button type="submit" class="btn follow-button w-5">Follow</button>
           </form>
-          <% } if (profileUser.followers.include(user_id)) {%>
+          <% } %> <% if (profileUser.followers.includes(user._id)) {%>
           <form
-            action="/<% profileUser.id %>/unfollow?_method=PATCH"
+            action="/<%= profileUser.id %>/unfollow?_method=PATCH"
             method="post"
           >
             <button type="submit" class="btn follow-button w-5">
@@ -96,8 +96,8 @@
                 <img src="/img/delete.svg" alt="" />
               </button>
             </form>
+            <% } %>
           </div>
-          <% } %>
         </div>
         <% } %>
       </div>
