@@ -18,7 +18,7 @@
       <%- include("./partials/menu") %>
       <div class="d-flex flex-column profile-container">
         <header class="profile-header">
-          <img src="" alt="profile-pic" class="profile-pic" />
+          <img src="/img/profile.svg" alt="profile-pic" class="profile-pic" />
         </header>
         <div class="d-flex justify-content-end">
           <% if (profileUser.id !== user.id) { %> <% if
@@ -57,7 +57,7 @@
         <% for(tweet of profileUser.tweets) {%>
         <div class="tweet-container p-4">
           <div class="d-flex">
-            <img src="" alt="pic" />
+            <img src="/img/profile.svg" alt="pic" />
             <div class="tweet-inner-container">
               <div class="d-flex justify-content-start">
                 <h6><%= profileUser.firstname %> <%= profileUser.lastname%></h6>

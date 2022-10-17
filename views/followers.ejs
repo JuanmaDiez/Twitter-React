@@ -22,8 +22,10 @@
           <p>@<%= profileUser.username %></p>
         </div>
         <div>
-          <a href=""></a>
-          <a href=""></a>
+          <a href="/profile/<%= profileUser.username %>/followers">Followers</a>
+          <a href="/profile/<%= profileUser.username %>/followings"
+            >Followings</a
+          >
         </div>
         <% for (follower of profileUser.followers) { %>
         <div class="tweet-container p-4 d-flex justify-content-between">
@@ -36,11 +38,11 @@
               </div>
             </div>
           </div>
-          <% if (!profileUser.followers.includes(user._id)) {%>
+          <% if (!user.following.includes(follower._id)) {%>
           <form action="/<%= follower.id %>/follow?_method=PATCH" method="post">
             <button type="submit" class="btn follow-button w-5">Follow</button>
           </form>
-          <% } %> <% if (profileUser.followers.includes(user._id)) {%>
+          <% } %> <% if (user.following.includes(follower._id)) {%>
           <form
             action="/<%= follower.id %>/unfollow?_method=PATCH"
             method="post"
