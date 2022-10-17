@@ -41,9 +41,22 @@ async function removeLike(req, res) {
   return res.redirect("back");
 }
 
-async function updateUser(req, res) {
+async function follow(req, res) {
   await User.findByIdAndUpdate(req.params.id, {
     $push: { followers: req.user._id },
+  });
+  await User.findByIdAndUpdate(req.user._id, {
+    $push: { following: req.params.id },
+  });
+  return res.redirect("back");
+}
+
+async function unfollow(req, res) {
+  await User.findByIdAndUpdate(req.params.id, {
+    $pull: { followers: req.user._id },
+  });
+  await User.findByIdAndUpdate(req.user._id, {
+    $pull: { following: req.params.id },
   });
   return res.redirect("back");
 }
@@ -54,5 +67,6 @@ module.exports = {
   deleteTweet,
   updateLike,
   removeLike,
-  updateUser,
+  follow,
+  unfollow,
 };
