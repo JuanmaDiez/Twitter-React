@@ -27,9 +27,17 @@ async function deleteTweet(req, res) {
   return res.redirect("back");
 }
 
+async function updateTweet(req, res) {
+  await Tweet.findByIdAndUpdate(req.params.tweetId, {
+    $push: { likes: req.user._id },
+  });
+  return res.redirect("back");
+}
+
 module.exports = {
   index,
   indexUser,
   create,
   deleteTweet,
+  updateTweet,
 };

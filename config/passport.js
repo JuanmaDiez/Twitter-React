@@ -20,8 +20,8 @@ module.exports = function (passport) {
       if (!user) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
-
-      if (user.password !== password) {
+      const checkPassword = await user.comparePassword(password);
+      if (!checkPassword) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
       return done(null, user);

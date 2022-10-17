@@ -53,6 +53,9 @@
           <form action="/profile/<%= tweet._id %>/delete?_method=DELETE" method="post">
             <button type="submit">Eliminar</button>
           </form>
+          <form action="/<%= tweet._id %>/update?_method=PATCH" method="post">
+            <button type="submit">Like</button>
+          </form>
         </div>
         <% } %>
       </div>
