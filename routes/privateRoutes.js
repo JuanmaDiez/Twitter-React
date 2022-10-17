@@ -1,6 +1,9 @@
 const express = require("express");
 const privateRouter = express.Router();
 const privateController = require("../controllers/privateController");
+const isAuthenticated = require("../middlewares/isAuthenticated");
+
+app.use(isAuthenticated);
 
 privateRouter.get("/", privateController.index);
 privateRouter.post("/", privateController.create);

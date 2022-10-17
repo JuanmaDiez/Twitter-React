@@ -31,7 +31,7 @@
           </form>
           <% } if (profileUser.followers.include(user_id)) {%>
           <form
-            action="/<% profileUser.id %>/following?_method=PATCH"
+            action="/<% profileUser.id %>/unfollow?_method=PATCH"
             method="post"
           >
             <button type="submit" class="btn follow-button w-5">
