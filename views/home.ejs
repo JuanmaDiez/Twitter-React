@@ -13,48 +13,54 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="container">
-      <h2 class="home-title">Home</h2>
-      <div class="form-floating d-flex">
-        <img
-          src="/img/profile.svg"
-          class="profile-picture"
-          alt="profile-picture"
-        />
-        <form action="/" method="POST">
-          <textarea
-            name="content"
-            class="form-control textarea"
-            placeholder="Whats happening?"
-            id="floatingTextarea2"
-            style="height: 100px"
-          ></textarea>
-          <button class="tweet-button">Tweet</button>
-        </form>
-      </div>
-      <div>
-        <% for(tweet of tweets.reverse()) {%>
-        <div class="tweet-container p-4">
-          <div class="d-flex">
-            <img
-              src="/img/profile.svg"
-              class="profile-picture"
-              alt="profile-picture"
-            />
-            <div class="ml-3 mr-1">
-              <div class="d-flex justify-content-start">
-                <h6>
-                  <%= tweet.author.firstname %> <%= tweet.author.lastname%>
-                </h6>
-                <p>@<%= tweet.author.username %></p>
+    <div class="d-flex">
+      <%- include("./partials/menu") %>
+      <div class="container">
+        <h2 class="home-title">Home</h2>
+        <div class="form-floating d-flex">
+          <img
+            src="/img/profile.svg"
+            class="profile-picture"
+            alt="profile-picture"
+          />
+          <form action="/" method="POST">
+            <textarea
+              name="content"
+              class="form-control"
+              placeholder="Whats happening?"
+              id="floatingTextarea2"
+              style="height: 100px"
+            ></textarea>
+            <div class="d-flex justify-content-end">
+              <button class="tweet-button">Tweet</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <% for(tweet of tweets.reverse()) {%>
+          <div class="tweet-container p-4">
+            <div class="d-flex">
+              <img
+                src="/img/profile.svg"
+                class="profile-picture"
+                alt="profile-picture"
+              />
+              <div class="ml-3 mr-1">
+                <div class="d-flex justify-content-start">
+                  <h6>
+                    <%= tweet.author.firstname %> <%= tweet.author.lastname%>
+                  </h6>
+                  <p>@<%= tweet.author.username %></p>
+                </div>
+                <p><%= tweet.content %></p>
+                <hr />
               </div>
-              <p><%= tweet.content %></p>
-              <hr />
             </div>
           </div>
+          <% } %>
         </div>
-        <% } %>
       </div>
+      <%- include("./partials/info") %>
     </div>
 
     <style>
@@ -64,7 +70,6 @@
 
       .textarea {
         border-style: none;
-        position: absolute;
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
@@ -82,11 +87,6 @@
       }
 
       .tweet-button {
-        position: absolute;
-        width: 76px;
-        height: 37px;
-        left: 1250px;
-        top: 60px;
         background: #1d9bf0;
         border: none;
         border-radius: 45px;

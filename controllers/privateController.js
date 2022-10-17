@@ -16,12 +16,20 @@ async function create(req, res) {
 }
 
 async function indexUser(req, res) {
-  const profileUser = await User.findOne({username: req.params.username}).populate("tweets");
+  const profileUser = await User.findOne({
+    username: req.params.username,
+  }).populate("tweets");
   return res.render("profile", { profileUser });
+}
+
+async function deleteTweet(req, res) {
+  await Tweet.findByIdAndRemove(req.params.tweetId);
+  return res.redirect("back");
 }
 
 module.exports = {
   index,
   indexUser,
   create,
+  deleteTweet,
 };

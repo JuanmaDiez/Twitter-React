@@ -5,8 +5,10 @@ const routes = require("./routes");
 const session = require("express-session");
 const passport = require("passport");
 const passportConfig = require("./config/passport");
+const methodOverride = require("method-override");
 
 app.set("view engine", "ejs"); // Aqui mostramos que el motor de vistas sera EJS
+app.use(methodOverride("_method")); // Le decimos al servidor que vamos a sobrescribir metodos en los formularios
 app.use(express.static("public")); // Estamos diciendo que las imagenes y los estilos los sacaremos de la carpeta Public
 app.use(express.urlencoded({ extended: true }));
 app.use(
