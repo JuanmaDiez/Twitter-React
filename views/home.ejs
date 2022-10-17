@@ -10,6 +10,7 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Document</title>
   </head>
   <body>
@@ -23,14 +24,15 @@
             class="profile-picture"
             alt="profile-picture"
           />
-          <form action="/" method="POST">
+          <form action="/" method="POST" class="w-100">
             <textarea
               name="content"
-              class="form-control"
+              class="form-control textarea"
               placeholder="Whats happening?"
               id="floatingTextarea2"
               style="height: 100px"
             ></textarea>
+
             <div class="d-flex justify-content-end">
               <button class="tweet-button">Tweet</button>
             </div>
@@ -53,7 +55,6 @@
                   <p>@<%= tweet.author.username %></p>
                 </div>
                 <p><%= tweet.content %></p>
-                <hr />
               </div>
             </div>
           </div>
@@ -62,43 +63,6 @@
       </div>
       <%- include("./partials/info") %>
     </div>
-
-    <style>
-      .home-title {
-        margin-top: 20px;
-      }
-
-      .textarea {
-        border-style: none;
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 24px;
-        width: 100%;
-      }
-
-      .profile-picture {
-        margin-bottom: 130px;
-        margin-right: 15px;
-        background-color: rgb(180, 180, 180);
-        padding: 10px;
-        border-radius: 80px;
-      }
-
-      .tweet-button {
-        background: #1d9bf0;
-        border: none;
-        border-radius: 45px;
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 600;
-        font-size: 15px;
-        line-height: 18px;
-        text-align: center;
-        color: #ffffff;
-      }
-    </style>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

@@ -1,4 +1,9 @@
+.sidebar{
+  width:fit-content;
+}
+
 .tweet-button-menu {
+  width: fit-content;
   background-color: #1d9bf0;
   border-radius: 2rem;
 }
@@ -95,3 +100,38 @@ small {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.home-title {
+  margin-top: 20px;
+}
+
+.textarea {
+  width: 100%;
+  border-style: none;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.profile-picture {
+  margin-bottom: 130px;
+  margin-right: 15px;
+}
+
+.tweet-button {
+  background: #1d9bf0;
+  border: none;
+  margin-top: 12px;
+  border-radius: 45px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  color: #ffffff;
+}
+
+
