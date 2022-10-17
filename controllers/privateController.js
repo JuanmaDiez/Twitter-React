@@ -41,6 +41,20 @@ async function removeLike(req, res) {
   return res.redirect("back");
 }
 
+async function followers(req, res) {
+  const profileUser = await User.findOne({
+    username: req.params.username,
+  }).populate("followers");
+  return res.render("followers", { profileUser });
+}
+
+async function following(req, res) {
+  const profileUser = await User.findOne({
+    username: req.params.username,
+  }).populate("following");
+  return res.render("following", { profileUser });
+}
+
 async function follow(req, res) {
   await User.findByIdAndUpdate(req.params.id, {
     $push: { followers: req.user._id },
@@ -60,6 +74,7 @@ async function unfollow(req, res) {
   });
   return res.redirect("back");
 }
+
 module.exports = {
   index,
   indexUser,
@@ -69,4 +84,6 @@ module.exports = {
   removeLike,
   follow,
   unfollow,
+  followers,
+  following,
 };
