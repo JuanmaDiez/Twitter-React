@@ -17,8 +17,8 @@
     <div class="container d-flex">
       <%- include("./partials/menu") %>
       <div class="d-flex flex-column profile-container">
-        <header class="profile-header">
-          <img src="/img/profile.svg" alt="profile-pic" class="profile-pic" />
+        <header id="profile-header">
+          <img src="/img/profile.svg" alt="profile-pic" id="profile-pic" />
         </header>
         <div class="d-flex justify-content-end profile-info">
           <% if (profileUser.id !== user.id) { %> <% if
