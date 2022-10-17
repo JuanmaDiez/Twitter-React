@@ -17,10 +17,10 @@
     <div class="container d-flex">
       <%- include("./partials/menu") %>
       <div class="d-flex flex-column profile-container">
-        <header class="profile-header">
-          <img src="" alt="profile-pic" class="profile-pic" />
+        <header id="profile-header">
+          <img src="" alt="profile-pic" id="profile-image" />
         </header>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end profile-info">
           <% if (profileUser.id !== user.id) { %> <% if
           (!profileUser.followers.includes(user._id)) {%>
           <form
