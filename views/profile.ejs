@@ -21,7 +21,24 @@
           <img src="" alt="profile-pic" class="profile-pic" />
         </header>
         <div class="d-flex justify-content-end">
-          <button class="btn follow-button w-5">Follow</button>
+          <% if (profileUser.id !== user.id) { %> <% if
+          (!profileUser.followers.includes(user._id)) {%>
+          <form
+            action="/<% profileUser.id %>/follow?_method=PATCH"
+            method="post"
+          >
+            <button type="submit" class="btn follow-button w-5">Follow</button>
+          </form>
+          <% } if (profileUser.followers.include(user_id)) {%>
+          <form
+            action="/<% profileUser.id %>/following?_method=PATCH"
+            method="post"
+          >
+            <button type="submit" class="btn follow-button w-5">
+              Unfollow
+            </button>
+          </form>
+          <% } %> <% } %>
         </div>
         <h3><%= profileUser.firstname %> <%= profileUser.lastname %></h3>
 

@@ -8,5 +8,7 @@ privateRouter.get("/profile/:username", privateController.indexUser);
 privateRouter.delete("/profile/:tweetId/delete", privateController.deleteTweet);
 privateRouter.patch("/:tweetId/like", privateController.updateLike);
 privateRouter.patch("/:tweetId/removeLike", privateController.removeLike);
+privateRouter.patch("/:id/follow", privateController.follow);
+privateRouter.patch("/:id/unfollow", privateController.unfollow);
 
 module.exports = privateRouter;
