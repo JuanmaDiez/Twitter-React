@@ -21,18 +21,39 @@
           class="profile-picture"
           alt="profile-picture"
         />
-        <textarea
-          class="form-control"
-          placeholder="Whats happening?"
-          id="floatingTextarea2"
-          class="textarea"
-          style="height: 100px"
-        ></textarea>
-        <a
-          href="/home/create"
-          type="submit"
-          class="btn btn-md tweet-button"
-        ></a>
+        <form action="/" method="POST">
+          <textarea
+            name="content"
+            class="form-control textarea"
+            placeholder="Whats happening?"
+            id="floatingTextarea2"
+            style="height: 100px"
+          ></textarea>
+          <button class="tweet-button">Tweet</button>
+        </form>
+      </div>
+      <div>
+        <% for(tweet of tweets.reverse()) {%>
+        <div class="tweet-container p-4">
+          <div class="d-flex">
+            <img
+              src="/img/profile.svg"
+              class="profile-picture"
+              alt="profile-picture"
+            />
+            <div class="ml-3 mr-1">
+              <div class="d-flex justify-content-start">
+                <h6>
+                  <%= tweet.author.firstname %> <%= tweet.author.lastname%>
+                </h6>
+                <p>@<%= tweet.author.username %></p>
+              </div>
+              <p><%= tweet.content %></p>
+              <hr />
+            </div>
+          </div>
+        </div>
+        <% } %>
       </div>
     </div>
 
@@ -49,6 +70,7 @@
         font-weight: 400;
         font-size: 20px;
         line-height: 24px;
+        width: 100%;
       }
 
       .profile-picture {
@@ -63,7 +85,7 @@
         position: absolute;
         width: 76px;
         height: 37px;
-        left: 1210px;
+        left: 1250px;
         top: 60px;
         background: #1d9bf0;
         border: none;

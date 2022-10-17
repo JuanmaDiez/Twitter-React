@@ -16,33 +16,32 @@
   <body>
     <div class="container d-flex">
       <%- include("./partials/menu") %>
-      <div class="d-flex flex-column">
+      <div class="d-flex flex-column ml-4 mr-4">
         <header class="profile-header">
           <img src="" alt="profile-pic" class="profile-pic" />
         </header>
-        <button>Follow</button>
+        <button class="follow-button">Follow</button>
         <h3><%= user.firstname %> <%= user.lastname %></h3>
-        <div class="d-flex">
-          <div class="d-flex justify-content-between">
-            <p>@<%= user.username %></p>
+
+        <div class="d-flex justify-content-between">
+          <p>@<%= user.username %></p>
+          <span>
             <div class="d-flex">
-              <p>
-                <%= user.followers.length %>
-                <a href="/profile/<%= user.id %>/followers">Followers</a>
-              </p>
+              <small><%= user.followers.length %></small>
+              <a href="/profile/<%= user.id %>/followers">Followers</a>
             </div>
             <div class="d-flex">
-              <p>
-                <%= user.following.length %>
-                <a href="/profile/<%= user.id %>/following">Following</a>
-              </p>
+              <small> <%= user.following.length %> </small>
+              <a href="/profile/<%= user.id %>/following">Following</a>
             </div>
-          </div>
-          <h5>Tweets</h5>
-          <% for(tweet of user.tweets) {%>
-          <div class="d-flex column">
-            <img src="" alt="" />
-            <div class="d-flex column">
+          </span>
+        </div>
+        <h5>Tweets</h5>
+        <% for(tweet of user.tweets) {%>
+        <div class="tweet-container p-4">
+          <div class="d-flex">
+            <img src="" alt="pic" />
+            <div class="ml-3 mr-1">
               <div class="d-flex justify-content-start">
                 <h6><%= user.firstname %> <%= user.lastname%></h6>
                 <p>@<%= user.username %></p>
@@ -50,8 +49,9 @@
               <p><%= tweet.content %></p>
             </div>
           </div>
-          <% } %>
+          <p><%= tweet.likes.length %></p>
         </div>
+        <% } %>
       </div>
       <%- include("./partials/info") %>
     </div>

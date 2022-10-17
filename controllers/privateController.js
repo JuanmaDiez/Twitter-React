@@ -1,7 +1,18 @@
+const Tweet = require("../models/Tweet");
 const User = require("../models/User");
 
-function index(req, res) {
-  return res.render("home");
+async function index(req, res) {
+  const tweets = await Tweet.find().populate("author");
+  return res.render("home", { tweets });
+}
+
+async function create(req, res) {
+  const newTweet = new Tweet({
+    author: req.user._id,
+    content: req.body.content,
+  });
+  await newTweet.save();
+  return res.redirect("/");
 }
 
 async function indexUser(req, res) {
@@ -12,4 +23,5 @@ async function indexUser(req, res) {
 module.exports = {
   index,
   indexUser,
+  create,
 };
