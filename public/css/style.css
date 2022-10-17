@@ -88,3 +88,10 @@ small {
 .tweet-container {
   border: solid 1px #eaeaea;
 }
+.tweet-inner-container {
+  margin-left: 10px;
+}
+.profile-container {
+  margin-left: 10px;
+  margin-right: 10px;
+}

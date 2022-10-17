@@ -16,8 +16,8 @@ async function create(req, res) {
 }
 
 async function indexUser(req, res) {
-  const user = await User.findById(req.params.id).populate("tweets");
-  return res.render("profile", { user });
+  const profileUser = await User.findOne({username: req.params.username}).populate("tweets");
+  return res.render("profile", { profileUser });
 }
 
 module.exports = {
