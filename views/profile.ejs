@@ -28,10 +28,10 @@
         <div class="d-flex justify-content-between">
           <p>@<%= profileUser.username %></p>
           <p>
-            <a href="/profile/<%= profileUser.id%>/following">
+            <a href="/profile/<%= profileUser.username%>/following">
               <%= profileUser.following.length %> Following
             </a>
-            <a href="/profile/<%= profileUser.id %>/followers">
+            <a href="/profile/<%= profileUser.username %>/followers">
               <%=profileUser.followers.length %> Followers
             </a>
           </p>
@@ -48,14 +48,39 @@
               </div>
               <p><%= tweet.content %></p>
             </div>
-          </div class="d-flex justify-content-between">
-          <p><%= tweet.likes.length %></p>
-          <form action="/profile/<%= tweet._id %>/delete?_method=DELETE" method="post">
-            <button type="submit">Eliminar</button>
-          </form>
-          <form action="/<%= tweet._id %>/update?_method=PATCH" method="post">
-            <button type="submit">Like</button>
-          </form>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div class="d-flex">
+              <p><%= tweet.likes.length %></p>
+              <% if (!tweet.likes.includes(user._id)) {%>
+              <form action="/<%= tweet._id %>/like?_method=PATCH" method="post">
+                <button type="submit">
+                  <img src="/img/like.svg" alt="" />
+                </button>
+              </form>
+              <% } %> <% if(tweet.likes.includes(user._id)) {%>
+              <form
+                action="/<%= tweet._id %>/removeLike?_method=PATCH"
+                method="post"
+              >
+                <button type="submit">
+                  <img src="/img/like-active.svg" alt="" />
+                </button>
+              </form>
+              <% } %>
+            </div>
+            <% if (profileUser.id === user.id) { %>
+
+            <form
+              action="/profile/<%= tweet._id %>/delete?_method=DELETE"
+              method="post"
+            >
+              <button type="submit">
+                <img src="/img/delete.svg" alt="" />
+              </button>
+            </form>
+          </div>
+          <% } %>
         </div>
         <% } %>
       </div>
