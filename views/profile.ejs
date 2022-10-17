@@ -76,7 +76,7 @@
                   <img src="/img/like.svg" alt="" />
                 </button>
               </form>
-              <% } %> <% if(tweet.likes.includes(user._id)) {%>
+              <% } %> <% else {%>
               <form
                 action="/<%= tweet._id %>/removeLike?_method=PATCH"
                 method="post"
