@@ -10,7 +10,7 @@ module.exports = async () => {
   // });
   await mongoose.connection.dropCollection("tweets");
   const tweets = []; // creao array vacio para poner los tweets que va creando el seeder
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 200; i++) {
     //aca va a recorrer el codigo de la linea de abajo para crear 20 tweets
     const newTweet = new Tweet({
       // creamos una nueva instancia del nuevo tweet, y le pasamos los parametros que queremos para crearlo
