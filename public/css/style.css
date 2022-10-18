@@ -20,12 +20,13 @@
 .follow-button {
   background: #1d9bf0;
   border: none;
+  height: 30px;
   padding: 0px 18px 0px 18px;
   border-radius: 45px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 18px;
   text-align: center;
   color: #ffffff;
@@ -36,6 +37,8 @@ small {
   font-style: normal;
 }
 .information-containers {
+  display: flex;
+  flex-direction: column;
   background-color: #f7f9f9;
   border-radius: 1rem;
 }
@@ -124,7 +127,7 @@ small {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 1rem;
   line-height: 24px;
 }
 
@@ -142,7 +145,7 @@ small {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 18px;
   text-align: center;
   color: #ffffff;
