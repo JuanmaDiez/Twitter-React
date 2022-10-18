@@ -1,7 +1,3 @@
-.sidebar {
-  width: fit-content;
-}
-
 .tweet-button-menu {
   background: #1d9bf0;
   border: none;
@@ -115,6 +111,8 @@ small {
 .profile-container {
   margin-left: 10px;
   margin-right: 10px;
+  border: solid 1px #6a6d70;
+  padding: 0;
 }
 
 .home-title {
@@ -164,9 +162,26 @@ small {
   border-radius: 50%;
   z-index: 1;
   position: relative;
-  top: 150px;
+  top: 120px;
   left: 10px;
+  height: 6rem;
+  width: 6rem;
 }
 .profile-info {
-  margin-top: 7rem;
+  margin-top: 4rem;
+}
+
+.profileUser-info {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+h3,
+h5 {
+  margin-left: 1rem;
+}
+.profile {
+  margin: 0;
+}
+.span-menu {
+  margin-left: 1rem;
 }
