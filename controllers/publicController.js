@@ -22,7 +22,7 @@ function create(req, res) {
       lastname: fields.lastName,
       email: fields.email,
       username: fields.userName,
-      image: files.image.newFilename,
+      avatar: files.image.newFilename,
       password: fields.password,
     });
     await newUser.save();
