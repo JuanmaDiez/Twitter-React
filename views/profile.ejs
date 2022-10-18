@@ -15,98 +15,107 @@
   </head>
   <body>
     <div class="container d-flex">
-      <%- include("./partials/menu") %>
-      <div class="d-flex flex-column profile-container">
-        <header id="profile-header">
-          <img
-            src="/img/<%= profileUser.avatar %> "
-            alt="profile-pic"
-            id="profile-pic"
-          />
-        </header>
-        <div class="d-flex justify-content-end profile-info">
-          <% if (profileUser.id !== user.id) { %> <% if
-          (!profileUser.followers.includes(user._id)) {%>
-          <form
-            action="/<%= profileUser.id %>/follow?_method=PATCH"
-            method="post"
-            id="profile-follow"
-          >
-            <button type="submit" class="btn follow-button w-5">Follow</button>
-          </form>
-          <% } %> <% if (profileUser.followers.includes(user._id)) {%>
-          <form
-            action="/<%= profileUser.id %>/unfollow?_method=PATCH"
-            method="post"
-          >
-            <button type="submit" class="btn follow-button w-5">
-              Unfollow
-            </button>
-          </form>
-          <% } %> <% } %>
-        </div>
-        <h3><%= profileUser.firstname %> <%= profileUser.lastname %></h3>
-
-        <div class="d-flex justify-content-between">
-          <p>@<%= profileUser.username %></p>
-          <p>
-            <a href="/profile/<%= profileUser.username%>/following">
-              <%= profileUser.following.length %> Following
-            </a>
-            <a href="/profile/<%= profileUser.username %>/followers">
-              <%=profileUser.followers.length %> Followers
-            </a>
-          </p>
-        </div>
-        <h5>Tweets</h5>
-        <% for(tweet of profileUser.tweets) {%>
-        <div class="tweet-container p-4">
-          <div class="d-flex">
-            <img src="/img/<%= profileUser.avatar %>" alt="pic" />
-            <div class="tweet-inner-container">
-              <div class="d-flex justify-content-start">
-                <h6><%= profileUser.firstname %> <%= profileUser.lastname%></h6>
-                <p class="ml-5">@<%= profileUser.username %></p>
-              </div>
-              <p><%= tweet.content %></p>
-            </div>
+      <div class="row">
+        <%- include("./partials/menu") %>
+        <div class="profile-container col-sm-9 col-md-6 col-lg-6 container">
+          <header id="profile-header">
+            <img
+              src="/img/<%= profileUser.avatar %> "
+              alt="profile-pic"
+              id="profile-image"
+            />
+          </header>
+          <div class="d-flex justify-content-end profile-info">
+            <% if (profileUser.id !== user.id) { %> <% if
+            (!profileUser.followers.includes(user._id)) {%>
+            <form
+              action="/<%= profileUser.id %>/follow?_method=PATCH"
+              method="post"
+              id="profile-follow"
+            >
+              <button type="submit" class="btn follow-button w-5">
+                Follow
+              </button>
+            </form>
+            <% } %> <% if (profileUser.followers.includes(user._id)) {%>
+            <form
+              action="/<%= profileUser.id %>/unfollow?_method=PATCH"
+              method="post"
+            >
+              <button type="submit" class="btn follow-button w-5">
+                Unfollow
+              </button>
+            </form>
+            <% } %> <% } %>
           </div>
-          <div class="d-flex justify-content-between">
+          <h3><%= profileUser.firstname %> <%= profileUser.lastname %></h3>
+
+          <div class="d-flex justify-content-between profileUser-info">
+            <p>@<%= profileUser.username %></p>
+            <p>
+              <a href="/profile/<%= profileUser.username%>/following">
+                <%= profileUser.following.length %> Following
+              </a>
+              <a href="/profile/<%= profileUser.username %>/followers">
+                <%=profileUser.followers.length %> Followers
+              </a>
+            </p>
+          </div>
+          <h5>Tweets</h5>
+          <% for(tweet of profileUser.tweets) {%>
+          <div class="tweet-container p-4">
             <div class="d-flex">
-              <% if (!tweet.likes.includes(user._id)) {%>
-                <form action="/<%= tweet._id %>/like?_method=PATCH" method="post">
+              <img src="/img/<%= profileUser.avatar %>" alt="pic" />
+              <div class="tweet-inner-container">
+                <div class="d-flex justify-content-start">
+                  <h6>
+                    <%= profileUser.firstname %> <%= profileUser.lastname%>
+                  </h6>
+                  <p class="ml-5">@<%= profileUser.username %></p>
+                </div>
+                <p><%= tweet.content %></p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex">
+                <% if (!tweet.likes.includes(user._id)) {%>
+                <form
+                  action="/<%= tweet._id %>/like?_method=PATCH"
+                  method="post"
+                >
                   <button type="submit">
                     <img src="/img/like.svg" alt="" />
                   </button>
                 </form>
                 <% } %> <%if (tweet.likes.includes(user._id)) {%>
-                  <form
+                <form
                   action="/<%= tweet._id %>/removeLike?_method=PATCH"
                   method="post"
-                  >
+                >
                   <button type="submit">
                     <img src="/img/like-active.svg" alt="" />
                   </button>
                 </form>
                 <% } %>
                 <p><%= tweet.likes.length %></p>
-            </div>
-            <% if (profileUser.id === user.id) { %>
+              </div>
+              <% if (profileUser.id === user.id) { %>
 
-            <form
-              action="/profile/<%= tweet._id %>/delete?_method=DELETE"
-              method="post"
-            >
-              <button type="submit">
-                <img src="/img/delete.svg" alt="" />
-              </button>
-            </form>
-            <% } %>
+              <form
+                action="/profile/<%= tweet._id %>/delete?_method=DELETE"
+                method="post"
+              >
+                <button type="submit">
+                  <img src="/img/delete.svg" alt="" />
+                </button>
+              </form>
+              <% } %>
+            </div>
           </div>
+          <% } %>
         </div>
-        <% } %>
+        <%- include("./partials/info") %>
       </div>
-      <%- include("./partials/info") %>
     </div>
   </body>
 </html>
