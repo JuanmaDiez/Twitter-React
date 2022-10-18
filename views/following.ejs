@@ -21,10 +21,20 @@
           <h3><%= profileUser.firstname %> <%= profileUser.lastname %></h3>
           <p>@<%= profileUser.username %></p>
         </div>
-        <div>
-          <a href="/profile/<%= profileUser.username %>/followers">Followers</a>
-          <a href="/profile/<%= profileUser.username %>/following"
-            >Followings</a
+        <div class="followers-following">
+          <strong
+            ><a
+              href="/profile/<%= profileUser.username %>/followers"
+              style="text-decoration: none"
+              >Followers</a
+            ></strong
+          >
+          <strong
+            ><a
+              href="/profile/<%= profileUser.username %>/following"
+              style="text-decoration: none"
+              >Followings</a
+            ></strong
           >
         </div>
         <% for (following of profileUser.following) { %>

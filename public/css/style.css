@@ -185,3 +185,9 @@ h5 {
 .span-menu {
   margin-left: 1rem;
 }
+
+.followers-following{
+  display: flex;
+  justify-content: space-around;
+
+}
