@@ -16,59 +16,64 @@
   <body>
     <div class="d-flex container">
       <div class="row">
-      <%- include("./partials/menu") %>
-      <div class="col-9 col-md-6">
-        <div>
-          <h3><%= profileUser.firstname %> <%= profileUser.lastname %></h3>
-          <p>@<%= profileUser.username %></p>
-        </div>
-        <div class="followers-following">
-          <strong
-            ><a
-              href="/profile/<%= profileUser.username %>/followers"
-              style="text-decoration: none"
-              >Followers</a
-            ></strong
-          >
-          <strong
-            ><a
-              href="/profile/<%= profileUser.username %>/following"
-              style="text-decoration: none"
-              >Following</a
-            ></strong
-          >
-        </div>
-        <% for (follower of profileUser.followers) { %>
-        <div class="tweet-container p-4 d-flex justify-content-between">
-          <div class="d-flex">
-            <img src="/img/profile.svg" alt="pic" />
-            <div class="tweet-inner-container">
-              <div class="d-flex justify-content-start">
-                <h6><%= follower.firstname %> <%= follower.lastname %></h6>
-                <p class="ml-5">@<%= follower.username %></p>
+        <%- include("./partials/menu") %>
+        <div class="col-9 col-md-6">
+          <div>
+            <h3><%= profileUser.firstname %> <%= profileUser.lastname %></h3>
+            <p>@<%= profileUser.username %></p>
+          </div>
+          <div class="followers-following">
+            <strong
+              ><a
+                href="/profile/<%= profileUser.username %>/followers"
+                style="text-decoration: none"
+                >Followers</a
+              ></strong
+            >
+            <strong
+              ><a
+                href="/profile/<%= profileUser.username %>/following"
+                style="text-decoration: none"
+                >Following</a
+              ></strong
+            >
+          </div>
+          <% for (follower of profileUser.followers) { %>
+          <div class="tweet-container p-4 d-flex justify-content-between">
+            <div class="d-flex">
+              <img src="/img/profile.svg" alt="pic" />
+              <div class="tweet-inner-container">
+                <div class="d-flex justify-content-start">
+                  <h6><%= follower.firstname %> <%= follower.lastname %></h6>
+                  <p class="ml-5">@<%= follower.username %></p>
+                </div>
               </div>
             </div>
+            <% if (!user.following.includes(follower._id)) {%>
+            <form
+              action="/<%= follower.id %>/follow?_method=PATCH"
+              method="post"
+            >
+              <button type="submit" class="btn follow-button w-5">
+                Follow
+              </button>
+            </form>
+            <% } %> <% if (user.following.includes(follower._id)) {%>
+            <form
+              action="/<%= follower.id %>/unfollow?_method=PATCH"
+              method="post"
+            >
+              <button type="submit" class="btn follow-button w-5">
+                Unfollow
+              </button>
+            </form>
+            <% } %>
           </div>
-          <% if (!user.following.includes(follower._id)) {%>
-          <form action="/<%= follower.id %>/follow?_method=PATCH" method="post">
-            <button type="submit" class="btn follow-button w-5">Follow</button>
-          </form>
-          <% } %> <% if (user.following.includes(follower._id)) {%>
-          <form
-            action="/<%= follower.id %>/unfollow?_method=PATCH"
-            method="post"
-          >
-            <button type="submit" class="btn follow-button w-5">
-              Unfollow
-            </button>
-          </form>
+
           <% } %>
         </div>
-
-        <% } %>
+        <%- include("./partials/info") %>
       </div>
-      <%- include("./partials/info") %>
-    </div>
     </div>
 
     <script

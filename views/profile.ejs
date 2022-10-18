@@ -53,10 +53,16 @@
           <div class="d-flex justify-content-between profileUser-info">
             <p>@<%= profileUser.username %></p>
             <p>
-              <a href="/profile/<%= profileUser.username%>/following">
+              <a
+                href="/profile/<%= profileUser.username%>/following"
+                style="text-decoration: none"
+              >
                 <%= profileUser.following.length %> Following
               </a>
-              <a href="/profile/<%= profileUser.username %>/followers">
+              <a
+                href="/profile/<%= profileUser.username %>/followers"
+                style="text-decoration: none"
+              >
                 <%=profileUser.followers.length %> Followers
               </a>
             </p>
