@@ -30,7 +30,7 @@ function create(req, res) {
   return res.redirect("/login");
 }
 
-async function logOut(res, res, next) {
+async function logOut(req, res, next) {
   req.logout(function (err) {
     if (err) {
       return next(err);

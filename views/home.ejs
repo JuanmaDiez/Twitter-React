@@ -18,7 +18,7 @@
       <div class="row">
         <%- include("./partials/menu") %>
         <div class="col-9 col-md-6">
-          <h2 class="home-title">Home</h2>
+          <h2 class="home-title mb-3 mt-1">Home</h2>
           <div class="form-floating d-flex">
             <img
               src="/img/<%= user.avatar %>"
@@ -64,7 +64,7 @@
                   action="/<%= tweet._id %>/like?_method=PATCH"
                   method="post"
                 >
-                  <button type="submit">
+                  <button type="submit" class="action-button">
                     <img src="/img/like.svg" alt="" />
                   </button>
                 </form>
@@ -73,7 +73,7 @@
                   action="/<%= tweet._id %>/removeLike?_method=PATCH"
                   method="post"
                 >
-                  <button type="submit">
+                  <button type="submit" class="action-button">
                     <img src="/img/like-active.svg" alt="" />
                   </button>
                 </form>

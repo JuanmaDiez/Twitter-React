@@ -185,9 +185,15 @@ h5 {
 .span-menu {
   margin-left: 1rem;
 }
+<<<<<<< HEAD
 
 .followers-following{
   display: flex;
   justify-content: space-around;
 
+=======
+.action-button {
+  border: none;
+  background-color: white;
+>>>>>>> 6f00b9e4e75197157fa9029c7c69a71abdb6a963
 }
