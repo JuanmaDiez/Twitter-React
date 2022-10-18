@@ -13,5 +13,6 @@ publicRouter.post(
   })
 );
 publicRouter.get("/register", publicController.register);
+publicRouter.get("/logout", publicController.logOut);
 
 module.exports = publicRouter;

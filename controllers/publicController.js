@@ -30,4 +30,13 @@ function create(req, res) {
   return res.redirect("/login");
 }
 
-module.exports = { login, register, create };
+async function logOut(res, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+}
+
+module.exports = { login, register, create, logOut };

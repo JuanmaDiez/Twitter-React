@@ -2,8 +2,14 @@ const Tweet = require("../models/Tweet");
 const User = require("../models/User");
 
 async function index(req, res) {
-  const tweets = await Tweet.find().populate("author");
-  return res.render("home", { tweets });
+  const loggedUser = await User.findById(req.user._id);
+  const followingTweets = await Tweet.find({
+    user: { $in: loggedUser.following },
+  })
+    .populate("author")
+    .sort({ createdAt: "desc" })
+    .limit(20);
+  return res.render("home", { followingTweets });
 }
 
 async function create(req, res) {
