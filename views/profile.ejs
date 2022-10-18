@@ -73,23 +73,23 @@
           </div>
           <div class="d-flex justify-content-between">
             <div class="d-flex">
-              <p><%= tweet.likes.length %></p>
               <% if (!tweet.likes.includes(user._id)) {%>
-              <form action="/<%= tweet._id %>/like?_method=PATCH" method="post">
-                <button type="submit">
-                  <img src="/img/like.svg" alt="" />
-                </button>
-              </form>
-              <% } %> <%if (tweet.likes.includes(user._id)) {%>
-              <form
-                action="/<%= tweet._id %>/removeLike?_method=PATCH"
-                method="post"
-              >
-                <button type="submit">
-                  <img src="/img/like-active.svg" alt="" />
-                </button>
-              </form>
-              <% } %>
+                <form action="/<%= tweet._id %>/like?_method=PATCH" method="post">
+                  <button type="submit">
+                    <img src="/img/like.svg" alt="" />
+                  </button>
+                </form>
+                <% } %> <%if (tweet.likes.includes(user._id)) {%>
+                  <form
+                  action="/<%= tweet._id %>/removeLike?_method=PATCH"
+                  method="post"
+                  >
+                  <button type="submit">
+                    <img src="/img/like-active.svg" alt="" />
+                  </button>
+                </form>
+                <% } %>
+                <p><%= tweet.likes.length %></p>
             </div>
             <% if (profileUser.id === user.id) { %>
 
