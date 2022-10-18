@@ -83,7 +83,7 @@
                   action="/<%= tweet._id %>/like?_method=PATCH"
                   method="post"
                 >
-                  <button type="submit">
+                  <button type="submit" class="action-button">
                     <img src="/img/like.svg" alt="" />
                   </button>
                 </form>
@@ -92,7 +92,7 @@
                   action="/<%= tweet._id %>/removeLike?_method=PATCH"
                   method="post"
                 >
-                  <button type="submit">
+                  <button type="submit" class="action-button">
                     <img src="/img/like-active.svg" alt="" />
                   </button>
                 </form>
@@ -105,7 +105,7 @@
                 action="/profile/<%= tweet._id %>/delete?_method=DELETE"
                 method="post"
               >
-                <button type="submit">
+                <button type="submit" class="action-button">
                   <img src="/img/delete.svg" alt="" />
                 </button>
               </form>

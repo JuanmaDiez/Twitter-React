@@ -182,3 +182,7 @@ h5 {
 .span-menu {
   margin-left: 1rem;
 }
+.action-button {
+  border: none;
+  background-color: white;
+}
