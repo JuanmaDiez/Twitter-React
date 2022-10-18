@@ -186,8 +186,11 @@ h5 {
   margin-left: 1rem;
 }
 
-.followers-following{
+.followers-following {
   display: flex;
   justify-content: space-around;
-
+}
+.action-button {
+  border: none;
+  background-color: white;
 }

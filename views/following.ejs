@@ -17,17 +17,25 @@
     <div class="d-flex container">
       <div class="row">
         <%- include("./partials/menu") %>
-        <div class="container">
+        <div class="container col-9 col-md-6">
           <div>
             <h3><%= profileUser.firstname %> <%= profileUser.lastname %></h3>
             <p>@<%= profileUser.username %></p>
           </div>
-          <div>
-            <a href="/profile/<%= profileUser.username %>/followers"
-              >Followers</a
+          <div class="followers-following">
+            <strong
+              ><a
+                href="/profile/<%= profileUser.username %>/followers"
+                style="text-decoration: none"
+                >Followers</a
+              ></strong
             >
-            <a href="/profile/<%= profileUser.username %>/followings"
-              >Followings</a
+            <strong
+              ><a
+                href="/profile/<%= profileUser.username %>/following"
+                style="text-decoration: none"
+                >Followings</a
+              ></strong
             >
           </div>
           <% for (following of profileUser.following) { %>
@@ -39,60 +47,28 @@
                   <h6><%= following.firstname %> <%= following.lastname %></h6>
                   <p class="ml-5">@<%= following.username %></p>
                 </div>
-    <div class="d-flex">
-      <%- include("./partials/menu") %>
-      <div class="container">
-        <div>
-          <h3><%= profileUser.firstname %> <%= profileUser.lastname %></h3>
-          <p>@<%= profileUser.username %></p>
-        </div>
-        <div class="followers-following">
-          <strong
-            ><a
-              href="/profile/<%= profileUser.username %>/followers"
-              style="text-decoration: none"
-              >Followers</a
-            ></strong
-          >
-          <strong
-            ><a
-              href="/profile/<%= profileUser.username %>/following"
-              style="text-decoration: none"
-              >Followings</a
-            ></strong
-          >
-        </div>
-        <% for (following of profileUser.following) { %>
-        <div class="tweet-container p-4 d-flex justify-content-between">
-          <div class="d-flex">
-            <img src="/img/profile.svg" alt="pic" />
-            <div class="tweet-inner-container">
-              <div class="d-flex justify-content-start">
-                <h6><%= following.firstname %> <%= following.lastname %></h6>
-                <p class="ml-5">@<%= following.username %></p>
               </div>
+              <% if (!user.following.includes(following._id)) {%>
+              <form
+                action="/<%= following.id %>/follow?_method=PATCH"
+                method="post"
+              >
+                <button type="submit" class="btn follow-button w-5">
+                  Follow
+                </button>
+              </form>
+              <% } %> <% if (user.following.includes(following._id)) {%>
+              <form
+                action="/<%= following.id %>/unfollow?_method=PATCH"
+                method="post"
+              >
+                <button type="submit" class="btn follow-button w-5">
+                  Unfollow
+                </button>
+              </form>
+              <% } %>
             </div>
-            <% if (!user.following.includes(following._id)) {%>
-            <form
-              action="/<%= following.id %>/follow?_method=PATCH"
-              method="post"
-            >
-              <button type="submit" class="btn follow-button w-5">
-                Follow
-              </button>
-            </form>
-            <% } %> <% if (user.following.includes(following._id)) {%>
-            <form
-              action="/<%= following.id %>/unfollow?_method=PATCH"
-              method="post"
-            >
-              <button type="submit" class="btn follow-button w-5">
-                Unfollow
-              </button>
-            </form>
-            <% } %>
           </div>
-
           <% } %>
         </div>
         <%- include("./partials/info") %>
