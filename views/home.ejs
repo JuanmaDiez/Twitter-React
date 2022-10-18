@@ -20,7 +20,7 @@
         <h2 class="home-title">Home</h2>
         <div class="form-floating d-flex">
           <img
-            src="/img/profile.svg"
+            src="`/img/<%= user.avatar %>"
             class="profile-picture"
             alt="profile-picture"
           />
@@ -43,7 +43,7 @@
           <div class="tweet-container p-4">
             <div class="d-flex">
               <img
-                src="/img/profile.svg"
+                src="/img/<%= tweet.author.avatar %>"
                 class="profile-picture"
                 alt="profile-picture"
               />

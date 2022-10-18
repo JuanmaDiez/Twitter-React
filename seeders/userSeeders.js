@@ -17,7 +17,7 @@ module.exports = async () => {
     lastname: "Organa",
     username: "lorgana",
     email: "lorgana@starwars.com",
-    avatar: "",
+    avatar: "profile.svg",
     password: "123456",
     bio: "Hola soy Lea",
   });
@@ -29,7 +29,7 @@ module.exports = async () => {
       lastname: faker.name.lastName(),
       username: faker.internet.userName(),
       email: faker.internet.email(),
-      avatar: faker.internet.avatar(),
+      avatar: "profile.svg",
       password: "1234",
       bio: faker.lorem.paragraph(),
     });

@@ -1,12 +1,21 @@
 <link rel="stylesheet" href="/css/style.css" />
 
-<div class="container d-flex flex-column sidebar">
-  <i class="fa-brands fa-twitter"></i>
-  <a href="/"><i class="fa-solid fa-house"></i> Home</a>
-  <a href="/profile/<%= user.username %>"
-    ><i class="fa-regular fa-user"></i> Profile</a
-  >
-  <button class="tweet-button-menu">Tweet</button>
+<div class="container d-flex">
+  <div class="d-flex flex-column">
+    <i class="fa-brands fa-twitter"></i>
+    <a href="/"><i class="fa-solid fa-house"></i></a>
+    <a href="/profile/<%= user.username %>"
+      ><i class="fa-regular fa-user"></i
+    ></a>
+    <button class="d-md-none d-lg-none">
+      <img src="/img/write.svg" alt="" />
+    </button>
+  </div>
+  <div class="d-flex flex-column justify-content-end">
+    <a href="/">Home</a>
+    <a href="<%= user.username %>/profile/">Profile</a>
+    <button class="d-none d-md-flex d-lg-flex tweet-button-menu">Tweet</button>
+  </div>
 </div>
 <script
   src="https://kit.fontawesome.com/9895568d5a.js"
