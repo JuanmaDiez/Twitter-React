@@ -59,7 +59,9 @@
                 </div>
               </div>
               <div class="d-flex justify-content-start">
-                <% if (!tweet.likes.includes(user._id)) {%>
+                <% if (!tweet.likes.includes(user._id)) {%> // Si el usuario
+                loggeado (user._id), NO se encuentra en el array de likes del
+                tweet, mostrale el boton con la imagen de la linea 69
                 <form
                   action="/<%= tweet._id %>/like?_method=PATCH"
                   method="post"
@@ -68,7 +70,9 @@
                     <img src="/img/like.svg" alt="" />
                   </button>
                 </form>
-                <% } %> <%if (tweet.likes.includes(user._id)) {%>
+                <% } %> <%if (tweet.likes.includes(user._id)) {%> // Si el
+                usuario loggeado (user._id), se encuentra en el array de likes
+                del tweet, mostrale el boton con la imagen de la linea 80
                 <form
                   action="/<%= tweet._id %>/removeLike?_method=PATCH"
                   method="post"

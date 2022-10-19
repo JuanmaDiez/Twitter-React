@@ -1,5 +1,5 @@
 const LocalStrategy = require("passport-local");
-const User = require("../models/User");
+const User = require("../models/User"); // Aqui requerimos el modelo User para poder hacerle consultas al modelo en este Archivo.
 
 module.exports = function (passport) {
   passport.use(
@@ -20,7 +20,7 @@ module.exports = function (passport) {
       if (!user) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
-      const checkPassword = await user.comparePassword(password);
+      const checkPassword = await user.comparePassword(password); // comparePassword proviene de la funcion que creamos en el Archivo User.js llamada userSchema.methods.comparePassword
       if (!checkPassword) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
