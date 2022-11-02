@@ -1,15 +1,8 @@
 const express = require("express");
 const userRouter = express.Router();
 const userController = require("../controllers/userController");
-const passport = require("passport");
 
-userRouter.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-  })
-);
+userRouter.post("/login", userController.token);
 userRouter.get("/profile/:username", userController.index);
 userRouter.get("/profile/:username/followers", userController.followers);
 userRouter.get("/profile/:username/following", userController.following);
