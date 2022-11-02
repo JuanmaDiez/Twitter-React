@@ -6,8 +6,8 @@ userRouter.post("/login", userController.token);
 userRouter.get("/profile/:username", userController.index);
 userRouter.get("/profile/:username/followers", userController.followers);
 userRouter.get("/profile/:username/following", userController.following);
-userRouter.patch("/:id/follow/:userId", userController.follow);
-userRouter.patch("/:id/unfollow/:userId", userController.unfollow);
+userRouter.patch("/:id/follow", userController.follow);
+userRouter.patch("/:id/unfollow", userController.unfollow);
 userRouter.post("/register", userController.store);
 
 module.exports = userRouter;
