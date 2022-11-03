@@ -33,14 +33,14 @@ async function token(req, res) {
   if (!checkPassword) {
     return res.json("Credenciales invalidas");
   }
-  const payload = { email: req.body.email };
+  const payload = { id: user._id };
   const token = jwt.sign(payload, JWT_STRING_SECRETO); // El string sescreto deberia estar en archivo .env
   return res.json({ token });
 }
 
 async function update(req, res) {
   const user = User.findById(req.params.id);
-  if (_.findIndex(user.followers, { _id: req.user._id }) === -1) {
+  if (_.findIndex(user.followers, { _id: req.auth.id }) === -1) {
     await User.findByIdAndUpdate(req.params.id, {
       $push: { followers: req.params.userId },
     });

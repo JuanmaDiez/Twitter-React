@@ -7,6 +7,7 @@ const routes = require("./routes"); // Requiriendo todas las rutas que se encuen
 const port = process.env.APP_PORT;
 
 app.use(express.static("public")); // Estamos diciendo que las imagenes y los estilos los sacaremos de la carpeta Public
+app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Deja disponible req.body para usar en nuestras vistas
 
 routes(app);
