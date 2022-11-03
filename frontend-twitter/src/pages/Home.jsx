@@ -5,12 +5,13 @@ import axios from "axios";
 function Home() {
   const user = useSelector((state) => state.user);
   console.log(user);
+  console.log(user.token);
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
         url: "http://localhost:8000",
         method: "GET",
-        headers: { Authorizaton: `Bearer ${user.token}` },
+        headers: { Authorization: `Bearer ${user.token}` },
       });
       console.log(response.data);
     };
