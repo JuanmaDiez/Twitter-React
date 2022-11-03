@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const cors = require("cors");
 const express = require("express"); // Aqui le decimos a la pagina que utilizaremos Express
 const { dbInitialSetup } = require("./db");
 const app = express(); // Aqui guardamos dentro de la constante app las funciones de Express
@@ -9,6 +10,7 @@ const port = process.env.APP_PORT;
 app.use(express.static("public")); // Estamos diciendo que las imagenes y los estilos los sacaremos de la carpeta Public
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Deja disponible req.body para usar en nuestras vistas
+app.use(cors());
 
 routes(app);
 

@@ -2,7 +2,6 @@ const Tweet = require("../models/Tweet");
 const User = require("../models/User");
 
 async function index(req, res) {
-  
   const loggedUser = await User.findById(req.auth.id);
   const followingTweets = await Tweet.find({
     user: { $in: loggedUser.following },
@@ -10,8 +9,7 @@ async function index(req, res) {
     .populate("author")
     .sort({ createdAt: "desc" })
     .limit(20);
-  return res.json(followingTweets);
-  return res.status(201);
+  return res.status(201).json(followingTweets);
 }
 
 async function update(req, res) {
