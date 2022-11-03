@@ -12,19 +12,17 @@ async function index(req, res) {
   return res.json(followingTweets);
 }
 
-async function updateLike(req, res) {
+async function update(req, res) {
   const tweet = await Tweet.findById(req.params.tweetId);
-  await Tweet.findByIdAndUpdate(req.params.tweetId, {
-    $push: { likes: req.user._id },
-  });
-  return res.json(tweet);
-}
-
-async function removeLike(req, res) {
-  const tweet = await Tweet.findById(req.params.tweetId);
-  await Tweet.findByIdAndUpdate(req.params.tweetId, {
-    $pull: { likes: req.user._id },
-  });
+  if (_.findIndex(tweet.likes, { _id: req.user._id }) === -1) {
+    await Tweet.findByIdAndUpdate(req.params.tweetId, {
+      $push: { likes: req.user._id },
+    });
+  } else {
+    await Tweet.findByIdAndUpdate(req.params.tweetId, {
+      $pull: { likes: req.user._id },
+    });
+  }
   return res.json(tweet);
 }
 
@@ -46,6 +44,5 @@ module.exports = {
   index,
   store,
   destroy,
-  updateLike,
-  removeLike,
+  update,
 };

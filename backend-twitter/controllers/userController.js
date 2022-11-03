@@ -38,24 +38,24 @@ async function token(req, res) {
   return res.json({ token });
 }
 
-async function follow(req, res) {
-  await User.findByIdAndUpdate(req.params.id, {
-    $push: { followers: req.params.userId },
-  });
-  await User.findByIdAndUpdate(req.params.userId, {
-    $push: { following: req.params.id },
-  });
+async function update(req, res) {
+  const user = User.findById(req.params.id);
+  if (_.findIndex(user.followers, { _id: req.user._id }) === -1) {
+    await User.findByIdAndUpdate(req.params.id, {
+      $push: { followers: req.params.userId },
+    });
+    await User.findByIdAndUpdate(req.params.userId, {
+      $push: { following: req.params.id },
+    });
+  } else {
+    await User.findByIdAndUpdate(req.params.id, {
+      $pull: { followers: req.params.userId },
+    });
+    await User.findByIdAndUpdate(req.params.userId, {
+      $pull: { following: req.params.id },
+    });
+  }
   return res.json("usuario seguido");
-}
-
-async function unfollow(req, res) {
-  await User.findByIdAndUpdate(req.params.id, {
-    $pull: { followers: req.params.userId },
-  });
-  await User.findByIdAndUpdate(req.params.userId, {
-    $pull: { following: req.params.id },
-  });
-  return res.json("usuario no seguido");
 }
 
 async function followers(req, res) {
@@ -84,7 +84,6 @@ module.exports = {
   followers,
   following,
   index,
-  follow,
-  unfollow,
+  update,
   token,
 };
