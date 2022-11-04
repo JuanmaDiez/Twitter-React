@@ -39,10 +39,7 @@ function Profile() {
           <Link to={`/profile/${profileOwner.username}/following`}>
             {profileOwner.following.length} Following
           </Link>
-          <Link
-            to={`/profile/${profileOwner.username}/followers`}
-            style="text-decoration: none"
-          >
+          <Link to={`/profile/${profileOwner.username}/followers`}>
             {profileOwner.followers.length} Followers
           </Link>
         </p>
