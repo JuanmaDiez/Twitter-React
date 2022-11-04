@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Tweet({ tweet }) {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user);
   const [selectedTweetDelete, setSelectedTweetDelete] = useState(null); //Seteo el tweet seleccionado para eliminar
   const [selectedTweetLike, setSelectedTweetLike] = useState(null); // Lo mismo para el like
 
