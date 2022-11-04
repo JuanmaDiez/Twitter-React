@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { login } from "../redux/userSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "../modules/login.modules.css";
 
 function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (email !== "") {
@@ -18,8 +20,8 @@ function Login() {
             method: "POST",
             data: { email: email, password: password },
           });
-          console.log(response.data);
           dispatch(login({ email, token: response.data.token }));
+          navigate("/");
         } catch (error) {
           console.log("error");
         }
