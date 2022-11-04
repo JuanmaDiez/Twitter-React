@@ -8,6 +8,7 @@ function Home() {
   const [tweetList, setTweetList] = useState([]);
   const user = useSelector((state) => state.user);
   console.log(user);
+  console.log(user.token);
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
