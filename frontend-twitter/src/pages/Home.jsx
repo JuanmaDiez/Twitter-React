@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Menu from "../components/Menu";
 import Info from "../components/Info";
+import profile from "../images/profile.svg";
+import "../modules/home.modules.css";
 
 function Home() {
   const [tweetList, setTweetList] = useState([]);
   const user = useSelector((state) => state.user);
-  console.log(user);
-  console.log(user.token);
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
@@ -24,15 +24,13 @@ function Home() {
   return (
     tweetList.length && (
       <div className="container d-flex">
-        <div className="row">
-          <div>
-            <Menu />
-          </div>
-          <div className="col-9 col-md-6">
+        <Menu />
+        <div>
+          <div className="d-flex flex-column px-4">
             <h2 className="home-title mb-3 mt-1">Home</h2>
             <div className="form-floating d-flex">
               <img
-                src="/img/ user.avatar "
+                src={profile}
                 className="profile-picture"
                 alt="profile-picture"
               />
@@ -49,12 +47,13 @@ function Home() {
                   <button className="tweet-button">Tweet</button>
                 </div>
               </form>
-              {tweetList.map((tweet) => {
-                return <div>{tweet.content}</div>;
-              })}
             </div>
+            {tweetList.map((tweet) => {
+              return <div>{tweet.content}</div>;
+            })}
           </div>
         </div>
+        <Info />
       </div>
     )
   );

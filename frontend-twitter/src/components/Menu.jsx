@@ -1,4 +1,5 @@
 import "../modules/menu.modules.css";
+import write from "../images/write.svg";
 
 function Menu() {
   return (
@@ -13,13 +14,13 @@ function Menu() {
             <span className="span-menu d-none d-md-block">Home</span>
           </div>
           <div className="d-flex">
-            <a href="/profile/<%= user.username %>">
+            <a href="/profile/">
               <i className="fa-regular fa-user"></i>
             </a>
             <span className="span-menu d-none d-md-block">Profile</span>
           </div>
           <button className="d-sm-block d-md-none d-lg-none">
-            <img src="/img/write.svg" alt="" />
+            <img src={write} alt="" />
           </button>
           <button className="d-none d-md-block d-lg-block tweet-button-menu">
             Tweet

@@ -1,4 +1,5 @@
 import "../modules/info.modules.css";
+import profile from "../images/profile.svg";
 
 function Info() {
   return (
@@ -24,7 +25,7 @@ function Info() {
       <div className="container information-containers mt-4 p-4">
         <h6>Who to follow?</h6>
         <div className="d-flex justify-content-between mb-2">
-          <img src="profile.svg" alt="Pic" />
+          <img src={profile} alt="Pic" />
           <div className="mx-3">
             <div>HackAcademy</div>
             <small>@HackAcademyDev</small>
@@ -34,7 +35,7 @@ function Info() {
           </div>
         </div>
         <div className="d-flex justify-content-between mb-2">
-          <img src="profile.svg" alt="Pic" />
+          <img src={profile} alt="Pic" />
           <div className="mx-3">
             <div>JavaScript</div>
             <small>@JavaScript</small>
@@ -44,7 +45,7 @@ function Info() {
           </div>
         </div>
         <div className="d-flex justify-content-between mb-2">
-          <img src="profile.svg" alt="Pic" />
+          <img src={profile} alt="Pic" />
           <div className="mx-3">
             <div>MongoDB</div>
             <small>@MongoDB</small>
@@ -55,7 +56,7 @@ function Info() {
           </div>
         </div>
         <div className="d-flex justify-content-between mb-2">
-          <img src="profile.svg" alt="Pic" />
+          <img src={profile} alt="Pic" />
           <div className="mx-3">
             <div>Node.js</div>
             <small>@nodejs</small>
@@ -65,7 +66,7 @@ function Info() {
           </div>
         </div>
         <div className="d-flex justify-content-between mb-2">
-          <img src="profile.svg" alt="Pic" />
+          <img src={profile} alt="Pic" />
           <div className="mx-3">
             <div>MDN Web Docs</div>
             <small>@MozDevNet</small>

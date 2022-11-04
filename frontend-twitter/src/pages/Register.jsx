@@ -1,6 +1,7 @@
 import React from "react";
 import { register } from "../redux/userSlice";
 import "../modules/register.modules.css";
+import twitter from "../images/twitter.png";
 
 function Register() {
   return (
@@ -11,7 +12,7 @@ function Register() {
             <div className="card" style={{ overflow: "hidden" }}>
               <div className="row g-0">
                 <div id="divIzq" className="col-md-6 col-lg-7 d-none d-md-flex">
-                  <img id="logoTwitter" src="twitter.png.png" alt="" />
+                  <img id="logoTwitter" src={twitter} alt="" />
                   <p id="welcome">Hi! Welcome to Twitter Clone 👋</p>
                 </div>
                 <div className="col-md-6 col-lg-5 d-flex align-items-center">
