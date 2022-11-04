@@ -1,0 +1,24 @@
+.card {
+    border-radius: 1rem;
+    border-color: #0c476f;
+  }
+
+  #divIzq {
+    background: #1d9bf0;
+    /* border-radius: 15px 0px 0px 15px; */
+  }
+
+  #welcome {
+    padding-top: 50rem;
+    font-family: "Inter", sans-serif;
+    color: white;
+    font-size: 1.4rem;
+    padding-bottom: 1rem;
+  }
+
+  .h1 fw-bold mb-0 {
+    font-family: Inter;
+    font-style: Semi-Bold;
+  }
+
+  

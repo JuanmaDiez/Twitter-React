@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { bindActionCreators, createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
   name: "user",
@@ -11,8 +11,11 @@ const userSlice = createSlice({
     logout(state, action) {
       state = {};
     },
+    register(state, action) {
+      return { ...action.payload };
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, register } = userSlice.actions;
 export default userSlice.reducer;

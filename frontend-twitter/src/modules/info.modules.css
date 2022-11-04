@@ -1,0 +1,21 @@
+.information-containers {
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f9f9;
+    border-radius: 1rem;
+  }
+
+  .follow-button {
+    background: #1d9bf0;
+    border: none;
+    height: 30px;
+    padding: 0px 18px 0px 18px;
+    border-radius: 45px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 18px;
+    text-align: center;
+    color: #ffffff;
+  }
