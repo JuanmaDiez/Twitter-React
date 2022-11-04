@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -23,35 +23,32 @@ function Profile() {
     <div class="profile-container col-sm-9 col-md-6 col-lg-6 container">
       <header id="profile-header">
         <img
-          src="/img/<%= profileUser.avatar %> "
+          src={`/img/${profileOwner.avatar}`}
           alt="profile-pic"
           id="profile-image"
         />
       </header>
       <div class="d-flex justify-content-end profile-info"></div>
       <h3>
-        {profileOwner.firstname} {profileUser.lastname}{" "}
+        {profileOwner.firstname} {profileOwner.lastname}{" "}
       </h3>
 
-      <div class="d-flex justify-content-between profileUser-info">
-        <p> {profileUser.username} </p>
+      <div class="d-flex justify-content-between profileOwner-info">
+        <p> {profileOwner.username} </p>
         <p>
-          <a
-            href="/profile/<%= profileUser.username%>/following"
+          <Link to={`/profile/${profileOwner.username}/following`}>
+            {profileOwner.following.length} Following
+          </Link>
+          <Link
+            to={`/profile/${profileOwner.username}/followers`}
             style="text-decoration: none"
           >
-            {profileUser.following.length} Following
-          </a>
-          <a
-            href="/profile/<%= profileUser.username %>/followers"
-            style="text-decoration: none"
-          >
-            {profileUser.followers.length} Followers
-          </a>
+            {profileOwner.followers.length} Followers
+          </Link>
         </p>
       </div>
       <h5>Tweets</h5>
-      {profileUser.tweets.map((tweet) => {
+      {profileOwner.tweets.map((tweet) => {
         return <div>{tweet.content}</div>;
       })}
     </div>
