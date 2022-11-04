@@ -23,17 +23,39 @@ function Home() {
 
   return (
     tweetList.length && (
-      <>
-        {tweetList.map((tweet) => {
-          return <div>{tweet.content}</div>;
-        })}
-        <div>
-          <Menu />
+      <div className="container d-flex">
+        <div className="row">
+          <div>
+            <Menu />
+          </div>
+          <div className="col-9 col-md-6">
+            <h2 className="home-title mb-3 mt-1">Home</h2>
+            <div className="form-floating d-flex">
+              <img
+                src="/img/ user.avatar "
+                className="profile-picture"
+                alt="profile-picture"
+              />
+              <form action="/" method="POST" className="w-100">
+                <textarea
+                  name="content"
+                  className="form-control textarea"
+                  placeholder="Whats happening?"
+                  id="floatingTextarea2"
+                  style={{ height: "100px" }}
+                ></textarea>
+
+                <div className="d-flex justify-content-end">
+                  <button className="tweet-button">Tweet</button>
+                </div>
+              </form>
+              {tweetList.map((tweet) => {
+                return <div>{tweet.content}</div>;
+              })}
+            </div>
+          </div>
         </div>
-        <div>
-          <Info />
-        </div>
-      </>
+      </div>
     )
   );
 }

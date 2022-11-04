@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Profile() {
   const user = useSelector((state) => state.user);
@@ -15,8 +16,9 @@ function Profile() {
       });
       setProfileOwner(response.data);
     };
+    getData();
   }, []);
-  return <div></div>;
+  return <div>Entraste al perfil</div>;
 }
 
 export default Profile;
