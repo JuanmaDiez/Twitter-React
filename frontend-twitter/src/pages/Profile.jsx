@@ -16,7 +16,6 @@ function Profile() {
         method: "GET",
         headers: { Authorization: `Bearer ${user.token}` },
       });
-      console.log(response.data);
       setProfileOwner(response.data);
     };
 

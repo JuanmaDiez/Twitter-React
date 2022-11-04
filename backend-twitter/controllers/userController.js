@@ -35,7 +35,7 @@ async function token(req, res) {
   }
   const payload = { id: user._id };
   const token = jwt.sign(payload, JWT_STRING_SECRETO); // El string sescreto deberia estar en archivo .env
-  return res.json({ token });
+  return res.json({ token, user });
 }
 
 async function update(req, res) {

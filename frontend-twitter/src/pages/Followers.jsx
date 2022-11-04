@@ -6,7 +6,7 @@ import axios from "axios";
 function Followers() {
   const user = useSelector((state) => state.user);
   const params = useParams();
-  const [profileOwner, setProfileOwner] = useState({});
+  const [profileOwner, setProfileOwner] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -20,63 +20,54 @@ function Followers() {
     getData();
   }, []);
   return (
-    <div class="col-9 col-md-6">
-      <div>
-        <h3>
-          {" "}
-          {profileOwner.firstname} {profileOwner.lastname}
-        </h3>
-        <p> {profileOwner.username} </p>
-      </div>
-      <div class="followers-following">
-        <strong>
-          <Link to={`/profile/${profileOwner.username}/followers`}>
-            Followers
-          </Link>
-        </strong>
-        <strong>
-          <Link to={`/profile/${profileOwner.username}/following`}>
-            Following
-          </Link>
-        </strong>
-      </div>
-      {profileOwner.followers.map((follower) => {
-        return (
-          <div class="tweet-container p-4 d-flex justify-content-between">
-            <div class="d-flex">
-              <img src="/img/profile.svg" alt="pic" />
-              <div class="tweet-inner-container">
-                <div class="d-flex justify-content-start">
-                  <h6>
-                    {follower.firstname} {follower.lastname}
-                  </h6>
-                  <p class="ml-5">@{follower.username}</p>
+    profileOwner && (
+      <div class="col-9 col-md-6">
+        <div>
+          <h3>
+            {profileOwner.firstname} {profileOwner.lastname}
+          </h3>
+          <p> {profileOwner.username} </p>
+        </div>
+        <div class="followers-following">
+          <strong>
+            <Link to={`/profile/${profileOwner.username}/followers`}>
+              Followers
+            </Link>
+          </strong>
+          <strong>
+            <Link to={`/profile/${profileOwner.username}/following`}>
+              Following
+            </Link>
+          </strong>
+        </div>
+        {profileOwner.followers.map((follower) => {
+          return (
+            <div class="tweet-container p-4 d-flex justify-content-between">
+              <div class="d-flex">
+                <img src="/img/profile.svg" alt="pic" />
+                <div class="tweet-inner-container">
+                  <div class="d-flex justify-content-start">
+                    <h6>
+                      {follower.firstname} {follower.lastname}
+                    </h6>
+                    <p class="ml-5">@{follower.username}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            {!user.following.includes(follower._id) ? (
-              <form
-                action="/<%= follower.id %>/follow?_method=PATCH"
-                method="post"
-              >
+              {!user.following.includes(follower._id) ? (
                 <button type="submit" class="btn follow-button w-5">
                   Follow
                 </button>
-              </form>
-            ) : (
-              <form
-                action="/<%= follower.id %>/unfollow?_method=PATCH"
-                method="post"
-              >
+              ) : (
                 <button type="submit" class="btn follow-button w-5">
                   Unfollow
                 </button>
-              </form>
-            )}
-          </div>
-        );
-      })}
-    </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    )
   );
 }
 

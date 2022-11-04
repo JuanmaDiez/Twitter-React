@@ -21,7 +21,7 @@ function Login() {
             method: "POST",
             data: { email: email, password: password },
           });
-          dispatch(login({ email, token: response.data.token }));
+          dispatch(login({ ...response.data }));
           navigate("/");
         } catch (error) {
           console.log("error");
