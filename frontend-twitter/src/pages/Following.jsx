@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import _ from "lodash";
 
 function Following() {
   const user = useSelector((state) => state.user);
@@ -22,15 +23,18 @@ function Following() {
   }, []);
 
   useEffect(() => {
-    const follow = async () => {
-      await axios({
-        url: `http://localhost:8000/${selectUser}`, //Agrego el id del usuario en la llamada
-        method: "PATCH",
-        headers: { Authorization: `Bearer ${user.token}` },
-      });
-      setSelectUser(null);
-    };
-    follow();
+    if (selectUser !== null) {
+      console.log(selectUser)
+      const follow = async () => {
+        await axios({
+          url: `http://localhost:8000/${selectUser}`, //Agrego el id del usuario en la llamada
+          method: "PATCH",
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        setSelectUser(null);
+      };
+      follow();
+    }
   }, [selectUser]);
 
   return (
@@ -74,7 +78,7 @@ function Following() {
                   setSelectUser(following._id); //elijo el usuario a seguir o dejar de seguir
                 }}
               >
-                {!user.following.includes(following._id)
+                {_.findIndex(user.following, following._id) === -1
                   ? "Follow"
                   : "Unfollow"}
               </button>
