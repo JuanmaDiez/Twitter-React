@@ -6,6 +6,7 @@ import axios from "axios";
 function Following() {
   const user = useSelector((state) => state.user);
   const params = useParams();
+  const [selectUser, setSelectUser] = useState(null); // elijo usuario a seguir
   const [profileOwner, setProfileOwner] = useState(null);
 
   useEffect(() => {
@@ -19,6 +20,19 @@ function Following() {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    const follow = async () => {
+      await axios({
+        url: `http://localhost:8000/${selectUser}`, //Agrego el id del usuario en la llamada
+        method: "PATCH",
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
+      setSelectUser(null);
+    };
+    follow();
+  }, [selectUser]);
+
   return (
     profileOwner && (
       <div class="container col-9 col-md-6">
@@ -54,15 +68,16 @@ function Following() {
                   </div>
                 </div>
               </div>
-              {!user.following.includes(following._id) ? (
-                <button type="submit" class="btn follow-button w-5">
-                  Follow
-                </button>
-              ) : (
-                <button type="submit" class="btn follow-button w-5">
-                  Unfollow
-                </button>
-              )}
+              <button
+                class="btn follow-button w-5"
+                onClick={() => {
+                  setSelectUser(following._id); //elijo el usuario a seguir o dejar de seguir
+                }}
+              >
+                {!user.following.includes(following._id)
+                  ? "Follow"
+                  : "Unfollow"}
+              </button>
             </div>
           );
         })}

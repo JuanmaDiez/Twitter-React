@@ -10,6 +10,6 @@ userRouter.use(checkJwt({ secret: JWT_STRING_SECRETO, algorithms: ["HS256"] }))
 userRouter.get( "/profile/:username",userController.index);
 userRouter.get( "/profile/:username/followers",userController.followers);
 userRouter.get("/profile/:username/following", userController.following);
-userRouter.patch("/:id/follow",userController.update);
+userRouter.patch("/:id",userController.update);
 
 module.exports = userRouter;
