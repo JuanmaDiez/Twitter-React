@@ -18,7 +18,44 @@ function Profile() {
     };
     getData();
   }, []);
-  return <div>Entraste al perfil</div>;
+
+  return (
+    <div class="profile-container col-sm-9 col-md-6 col-lg-6 container">
+      <header id="profile-header">
+        <img
+          src="/img/<%= profileUser.avatar %> "
+          alt="profile-pic"
+          id="profile-image"
+        />
+      </header>
+      <div class="d-flex justify-content-end profile-info"></div>
+      <h3>
+        {profileOwner.firstname} {profileUser.lastname}{" "}
+      </h3>
+
+      <div class="d-flex justify-content-between profileUser-info">
+        <p> {profileUser.username} </p>
+        <p>
+          <a
+            href="/profile/<%= profileUser.username%>/following"
+            style="text-decoration: none"
+          >
+            {profileUser.following.length} Following
+          </a>
+          <a
+            href="/profile/<%= profileUser.username %>/followers"
+            style="text-decoration: none"
+          >
+            {profileUser.followers.length} Followers
+          </a>
+        </p>
+      </div>
+      <h5>Tweets</h5>
+      {profileUser.tweets.map((tweet) => {
+        return <div>{tweet.content}</div>;
+      })}
+    </div>
+  );
 }
 
 export default Profile;
