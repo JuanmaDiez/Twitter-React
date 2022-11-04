@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -18,7 +18,38 @@ function Profile() {
     };
     getData();
   }, []);
-  return <div>Entraste al perfil</div>;
+
+  return (
+    <div class="profile-container col-sm-9 col-md-6 col-lg-6 container">
+      <header id="profile-header">
+        <img
+          src={`/img/${profileOwner.avatar}`}
+          alt="profile-pic"
+          id="profile-image"
+        />
+      </header>
+      <div class="d-flex justify-content-end profile-info"></div>
+      <h3>
+        {profileOwner.firstname} {profileOwner.lastname}{" "}
+      </h3>
+
+      <div class="d-flex justify-content-between profileOwner-info">
+        <p> {profileOwner.username} </p>
+        <p>
+          <Link to={`/profile/${profileOwner.username}/following`}>
+            {profileOwner.following.length} Following
+          </Link>
+          <Link to={`/profile/${profileOwner.username}/followers`}>
+            {profileOwner.followers.length} Followers
+          </Link>
+        </p>
+      </div>
+      <h5>Tweets</h5>
+      {profileOwner.tweets.map((tweet) => {
+        return <div>{tweet.content}</div>;
+      })}
+    </div>
+  );
 }
 
 export default Profile;
