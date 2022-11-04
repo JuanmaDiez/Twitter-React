@@ -1,5 +1,6 @@
 const Tweet = require("../models/Tweet");
 const User = require("../models/User");
+const _ = require("lodash");
 
 async function index(req, res) {
   const loggedUser = await User.findById(req.auth.id);
