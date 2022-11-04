@@ -17,11 +17,7 @@ function Register() {
                 </div>
                 <div className="col-md-6 col-lg-5 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
-                    <form
-                      action="/register"
-                      method="post"
-                      enctype="multipart/form-data"
-                    >
+                    <form action="/register" method="post">
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <span className="h1 fw-bold mb-0">Sign up</span>
                       </div>

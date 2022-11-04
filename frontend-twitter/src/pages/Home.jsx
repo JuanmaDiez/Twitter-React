@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Menu from "../components/Menu";
 import Info from "../components/Info";
+import Tweet from "../components/Tweet";
 import profile from "../images/profile.svg";
 import "../modules/home.modules.css";
 
@@ -49,7 +50,7 @@ function Home() {
               </form>
             </div>
             {tweetList.map((tweet) => {
-              return <div>{tweet.content}</div>;
+              return <Tweet tweet={tweet} />;
             })}
           </div>
         </div>

@@ -1,5 +1,5 @@
 function Tweet({ tweet }) {
-  return <div>Tweet</div>;
+  return <div>{tweet.content}</div>;
 }
 
 export default Tweet;
