@@ -2,6 +2,7 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const JWT_STRING_SECRETO = process.env.JWT_STRING_SECRETO;
 const formidable = require("formidable");
+const _ = require("lodash");
 
 const form = formidable({
   multiples: true,
@@ -40,6 +41,7 @@ async function token(req, res) {
 
 async function update(req, res) {
   const user = User.findById(req.params.id);
+  console.log(_.findIndex(user.followers, {_id: req.auth.id}))
   if (_.findIndex(user.followers, { _id: req.auth.id }) === -1) {
     await User.findByIdAndUpdate(req.params.id, {
       $push: { followers: req.params.userId },
@@ -61,14 +63,18 @@ async function update(req, res) {
 async function followers(req, res) {
   const profileUser = await User.findOne({
     username: req.params.username,
-  }).populate("followers");
+  })
+    .populate("followers")
+    .populate("following");
   return res.json(profileUser);
 }
 
 async function following(req, res) {
   const profileUser = await User.findOne({
     username: req.params.username,
-  }).populate("following");
+  })
+    .populate("following")
+    .populate("followers");
   return res.json(profileUser);
 }
 

@@ -8,9 +8,10 @@ function Tweet({ tweet }) {
   const [selectedTweetLike, setSelectedTweetLike] = useState(null); // Lo mismo para el like
 
   useEffect(() => {
-    if (!selectedTweetDelete) {
+    if (selectedTweetDelete !== null) {
       //Solo se ejecuta si hay un tweet seleccionado
       const deleteTweet = async () => {
+        console.log(selectedTweetDelete);
         await axios({
           url: `http://localhost:8000/${selectedTweetDelete}`, //sumo a la url el id del tweet
           method: "DELETE",
@@ -23,39 +24,46 @@ function Tweet({ tweet }) {
   }, [selectedTweetDelete]);
 
   useEffect(() => {
-    const like = async () => {
-      await axios({
-        url: `http:localhost:8000/${selectedTweetLike}`,
-        method: "PATCH",
-        headers: { Authorization: `Bearer ${user.token}` },
-      });
-    };
+    if (selectedTweetLike !== null) {
+      console.log(selectedTweetLike);
+      const like = async () => {
+        await axios({
+          url: `http://localhost:8000/${selectedTweetLike}`,
+          method: "PATCH",
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        setSelectedTweetLike(null);
+      };
+      like();
+    }
   }, [selectedTweetLike]);
 
   return (
-    <div>
-      <p>{tweet.content}</p>
-      <span>
-        <button
-          onClick={() => {
-            setSelectedTweetLike(tweet._id); //selecciono el tweet a likear
-          }}
-        >
-          {tweet.likes.length}
-        </button>
-      </span>
-      {user.user._id === tweet.author._id ? ( //solo aparece si el dueño del tweet es el usuario logueado
+    tweet && (
+      <div>
+        <p>{tweet.content}</p>
         <span>
           <button
             onClick={() => {
-              setSelectedTweetDelete(tweet._id); //selecciono el tweet a eliminar
+              setSelectedTweetLike(tweet._id); //selecciono el tweet a likear
             }}
           >
-            Eliminar
+            {tweet.likes.length}
           </button>
         </span>
-      ) : null}
-    </div>
+        {user.user._id === tweet.author ? ( //solo aparece si el dueño del tweet es el usuario logueado
+          <span>
+            <button
+              onClick={() => {
+                setSelectedTweetDelete(tweet._id); //selecciono el tweet a eliminar
+              }}
+            >
+              Eliminar
+            </button>
+          </span>
+        ) : null}
+      </div>
+    )
   );
 }
 
