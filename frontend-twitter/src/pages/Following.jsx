@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import _ from "lodash";
+import "../modules/followers.modules.css";
+import profile from "../images/profile.svg";
 
 function Following() {
   const user = useSelector((state) => state.user);
@@ -39,14 +41,14 @@ function Following() {
 
   return (
     profileOwner && (
-      <div class="container col-9 col-md-6">
+      <div className="container col-9 col-md-6">
         <div>
           <h3>
             {profileOwner.firstname} {profileOwner.lastname}{" "}
           </h3>
           <p>@{profileOwner.username}</p>
         </div>
-        <div class="followers-following">
+        <div className="followers-following">
           <strong>
             <Link to={`/profile/${profileOwner.username}/followers`}>
               Followers
@@ -60,20 +62,20 @@ function Following() {
         </div>
         {profileOwner.following.map((following) => {
           return (
-            <div class="tweet-container p-4 d-flex justify-content-between">
-              <div class="d-flex">
-                <img src="/img/profile.svg" alt="pic" />
-                <div class="tweet-inner-container">
-                  <div class="d-flex justify-content-start">
+            <div className="tweet-container p-4 d-flex justify-content-between">
+              <div className="d-flex">
+                <img src={profile} alt="pic" />
+                <div className="tweet-inner-container">
+                  <div className="d-flex justify-content-start">
                     <h6>
                       {following.firstname} {following.lastname}
                     </h6>
-                    <p class="ml-5">@{following.username}</p>
+                    <p className="ml-5">@{following.username}</p>
                   </div>
                 </div>
               </div>
               <button
-                class="btn follow-button w-5"
+                className="btn follow-button w-5"
                 onClick={() => {
                   setSelectUser(following._id); //elijo el usuario a seguir o dejar de seguir
                 }}
