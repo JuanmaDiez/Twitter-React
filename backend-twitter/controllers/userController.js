@@ -4,15 +4,16 @@ const JWT_STRING_SECRETO = process.env.JWT_STRING_SECRETO;
 const formidable = require("formidable");
 const _ = require("lodash");
 
-const form = formidable({
-  multiples: true,
-  uploadDir: __dirname + "/../public/img",
-  keepExtensions: true,
-});
-
 function store(req, res) {
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
+  });
   form.parse(req, async (err, fields, files) => {
-    const newUser = await new User({
+    console.log(fields);
+    console.log(files);
+    const newUser = new User({
       firstname: fields.firstName,
       lastname: fields.lastName,
       email: fields.email,
@@ -22,7 +23,7 @@ function store(req, res) {
     });
     await newUser.save();
   });
-  return res.redirect("/login");
+  return res.json(newUser);
 }
 
 async function token(req, res) {
