@@ -11,7 +11,7 @@ function Home() {
   const [tweetList, setTweetList] = useState([]);
   const user = useSelector((state) => state.user);
   const [selectedTweetLike, setSelectedTweetLike] = useState(null); // Lo mismo para el like
-
+  const [toggle, setToggle] = useState(false)
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
@@ -21,8 +21,9 @@ function Home() {
       });
       setTweetList(response.data);
     };
+    setToggle(false)
     getData();
-  }, []);
+  }, [toggle]);
 
   useEffect(() => {
     if (selectedTweetLike !== null) {
