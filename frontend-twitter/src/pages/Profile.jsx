@@ -63,7 +63,7 @@ function Profile() {
         <div className="profile-container col-sm-9 col-md-6 col-lg-6 container">
           <header id="profile-header">
             <img
-              src={`/img/${profileOwner.avatar}`}
+              src={`http://localhost:8000/img/${profileOwner.avatar}`}
               alt="profile-pic"
               id="profile-image"
             />

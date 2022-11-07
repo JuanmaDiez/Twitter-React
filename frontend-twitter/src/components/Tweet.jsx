@@ -13,7 +13,7 @@ function Tweet({ tweet, setSelectedTweetLike, setSelectedTweetDelete }) {
       <div className="tweet-container p-4">
         <div className="d-flex">
           <img
-            src={`/img/${tweet.author.avatar}`}
+            src={`http://localhost:8000/img/${tweet.author.avatar}`}
             className="profile-picture"
             alt="profile-picture"
           />
