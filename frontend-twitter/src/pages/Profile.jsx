@@ -3,6 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Tweet from "../components/Tweet";
+import "../modules/profile.modules.css";
+import Info from "../components/Info";
+import Menu from "../components/Menu";
 
 function Profile() {
   const user = useSelector((state) => state.user);
@@ -12,7 +15,6 @@ function Profile() {
   const [selectedTweetLike, setSelectedTweetLike] = useState(null); // Lo mismo para el like
 
   useEffect(() => {
-    console.log("hola");
     const getData = async () => {
       const response = await axios({
         url: `http://localhost:8000/profile/${params.username}`,
@@ -29,7 +31,6 @@ function Profile() {
     if (selectedTweetDelete !== null) {
       //Solo se ejecuta si hay un tweet seleccionado
       const deleteTweet = async () => {
-        console.log(selectedTweetDelete);
         await axios({
           url: `http://localhost:8000/tweet/${selectedTweetDelete}`, //sumo a la url el id del tweet
           method: "DELETE",
@@ -43,7 +44,6 @@ function Profile() {
 
   useEffect(() => {
     if (selectedTweetLike !== null) {
-      console.log(selectedTweetLike);
       const like = async () => {
         await axios({
           url: `http://localhost:8000/tweet/${selectedTweetLike}`,
@@ -58,35 +58,52 @@ function Profile() {
 
   return (
     profileOwner && (
-      <div className="profile-container col-sm-9 col-md-6 col-lg-6 container">
-        <header id="profile-header">
-          <img
-            src={`/img/${profileOwner.avatar}`}
-            alt="profile-pic"
-            id="profile-image"
-          />
-        </header>
-        <div className="d-flex justify-content-end profile-info">
-          <h3>
-            {profileOwner.firstname} {profileOwner.lastname}{" "}
-          </h3>
+      <div className="row">
+        <Menu />
+        <div className="profile-container col-sm-9 col-md-6 col-lg-6 container">
+          <header id="profile-header">
+            <img
+              src={`/img/${profileOwner.avatar}`}
+              alt="profile-pic"
+              id="profile-image"
+            />
+          </header>
+          <div className="d-flex justify-content-between profile-info mb-5">
+            <h3>
+              {profileOwner.firstname} {profileOwner.lastname}
+            </h3>
 
-          <div className="d-flex justify-content-between profileOwner-info">
-            <p> {profileOwner.username} </p>
-            <p>
-              <Link to={`/profile/${profileOwner.username}/following`}>
-                {profileOwner.following.length} Following
-              </Link>
-              <Link to={`/profile/${profileOwner.username}/followers`}>
-                {profileOwner.followers.length} Followers
-              </Link>
-            </p>
+            <div className="d-flex justify-content-between profileOwner-info">
+              <p className="mr-2"> {profileOwner.username} </p>
+              <p>
+                <Link
+                  to={`/profile/${profileOwner.username}/following`}
+                  className="mr-2"
+                >
+                  {profileOwner.following.length} Following
+                </Link>
+                <Link
+                  to={`/profile/${profileOwner.username}/followers`}
+                  className="mr-2"
+                >
+                  {profileOwner.followers.length} Followers
+                </Link>
+              </p>
+            </div>
           </div>
+          <h5>Tweets</h5>
+          {profileOwner.tweets.map((tweet) => {
+            return (
+              <Tweet
+                tweet={tweet}
+                key={tweet._id}
+                setSelectedTweetDelete={setSelectedTweetDelete}
+                setSelectedTweetLike={setSelectedTweetLike}
+              />
+            );
+          })}
         </div>
-        <h5>Tweets</h5>
-        {profileOwner.tweets.map((tweet) => {
-          return <Tweet tweet={tweet} key={tweet._id} setSelectedTweetDelete={setSelectedTweetDelete} setSelectedTweetLike={setSelectedTweetLike} />;
-        })}
+        <Info />
       </div>
     )
   );

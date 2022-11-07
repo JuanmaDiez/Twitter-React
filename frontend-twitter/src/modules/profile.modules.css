@@ -1,0 +1,33 @@
+.profile-container {
+  margin-left: 10px;
+  margin-right: 10px;
+  border: solid 1px #6a6d70;
+  padding: 0;
+}
+#profile-header {
+  height: 10rem;
+  background-color: #1d9bf0;
+  position: static;
+  z-index: 0;
+}
+#profile-image {
+  border: solid 3px white;
+  border-radius: 50%;
+  z-index: 1;
+  position: relative;
+  top: 150px;
+  right: 200px;
+  height: 6rem;
+  width: 6rem;
+}
+.profile-info {
+  margin-top: 4rem;
+}
+.profileUser-info {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+h3,
+h5 {
+  margin-left: 1rem;
+}
