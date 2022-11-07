@@ -1,5 +1,6 @@
 import "../modules/menu.modules.css";
 import write from "../images/write.svg";
+import { Link } from "react-router-dom";
 
 function Menu() {
   return (
@@ -14,9 +15,9 @@ function Menu() {
             <span className="span-menu d-none d-md-block">Home</span>
           </div>
           <div className="d-flex">
-            <a href="/profile/">
-              <i className="fa-regular fa-user"></i>
-            </a>
+            <Link to={"/"}>Home </Link>
+            <i className="fa-regular fa-user"></i>
+
             <span className="span-menu d-none d-md-block">Profile</span>
           </div>
           <button className="d-sm-block d-md-none d-lg-none">

@@ -1,0 +1,27 @@
+.followers-following {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tweet-container {
+    border: solid 1px #eaeaea;
+}
+
+.tweet-inner-container {
+    margin-left: 10px;
+}
+
+.follow-button {
+    background: #1d9bf0;
+    border: none;
+    height: 30px;
+    padding: 0px 18px 0px 18px;
+    border-radius: 45px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 18px;
+    text-align: center;
+    color: #ffffff;
+}  

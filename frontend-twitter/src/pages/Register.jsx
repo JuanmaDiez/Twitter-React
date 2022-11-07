@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { register } from "../redux/userSlice";
 import "../modules/register.modules.css";
 import twitter from "../images/twitter.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState(null);
+  useEffect(() => {
+    const register = async () => {
+      await axios({
+        url: "http://localhost:8000/register",
+        method: "POST",
+        data: formData,
+        headers: { "Content-Type": "mulipart/form-data" },
+      });
+      navigate("/login");
+    };
+    register();
+  }, [formData]);
   return (
     <section className="vh-100" style={{ backgroundColor: "#0c476f" }}>
       <div className="container py-5 h-100">
@@ -17,7 +33,18 @@ function Register() {
                 </div>
                 <div className="col-md-6 col-lg-5 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
-                    <form action="/register" method="post">
+                    <form
+                      action="/register"
+                      method="post"
+                      onSubmit={(event) => {
+                        event.preventDefault();
+                        setFormData(new FormData());
+                        formData.append(
+                          "firstName",
+                          event.target.firstName.value
+                        );
+                      }}
+                    >
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <span className="h1 fw-bold mb-0">Sign up</span>
                       </div>
