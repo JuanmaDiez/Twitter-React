@@ -77,7 +77,7 @@ function Followers() {
                   setSelectUser(follower._id);
                 }}
               >
-                {_.findIndex(user.following, follower._id) === -1
+                {_.findIndex(user.following, {username:follower.username}) === -1
                   ? "Follow"
                   : "Unfollow"}
               </button>

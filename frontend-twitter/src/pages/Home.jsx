@@ -10,6 +10,8 @@ import "../modules/home.modules.css";
 function Home() {
   const [tweetList, setTweetList] = useState([]);
   const user = useSelector((state) => state.user);
+  const [selectedTweetLike, setSelectedTweetLike] = useState(null); // Lo mismo para el like
+
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
@@ -21,6 +23,21 @@ function Home() {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    if (selectedTweetLike !== null) {
+      console.log(selectedTweetLike);
+      const like = async () => {
+        await axios({
+          url: `http://localhost:8000/tweet/${selectedTweetLike}`,
+          method: "PATCH",
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        setSelectedTweetLike(null);
+      };
+      like();
+    }
+  }, [selectedTweetLike]);
 
   return (
     tweetList.length && (
@@ -50,7 +67,9 @@ function Home() {
               </form>
             </div>
             {tweetList.map((tweet) => {
-              return <Tweet tweet={tweet} />;
+              return (
+                <Tweet tweet={tweet} setSelectedTweetLike={setSelectedTweetLike} />
+              );
             })}
           </div>
         </div>

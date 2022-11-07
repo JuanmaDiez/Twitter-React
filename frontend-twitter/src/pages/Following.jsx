@@ -24,7 +24,7 @@ function Following() {
 
   useEffect(() => {
     if (selectUser !== null) {
-      console.log(selectUser)
+      console.log(selectUser);
       const follow = async () => {
         await axios({
           url: `http://localhost:8000/${selectUser}`, //Agrego el id del usuario en la llamada
@@ -78,7 +78,9 @@ function Following() {
                   setSelectUser(following._id); //elijo el usuario a seguir o dejar de seguir
                 }}
               >
-                {_.findIndex(user.following, following._id) === -1
+                {_.findIndex(user.following, {
+                  username: following.username,
+                }) === -1
                   ? "Follow"
                   : "Unfollow"}
               </button>

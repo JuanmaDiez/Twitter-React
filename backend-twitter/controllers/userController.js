@@ -34,26 +34,27 @@ async function token(req, res) {
   if (!checkPassword) {
     return res.json("Credenciales invalidas");
   }
-  const payload = { id: user._id };
+  const payload = { user: user };
   const token = jwt.sign(payload, JWT_STRING_SECRETO); // El string sescreto deberia estar en archivo .env
   return res.json({ token, user });
 }
 
 async function update(req, res) {
-  const user = User.findById(req.params.id);
-  console.log(_.findIndex(user.followers, {_id: req.auth.id}))
-  if (_.findIndex(user.followers, { _id: req.auth.id }) === -1) {
+  const user = await User.findById(req.params.id).populate("followers");
+  if (
+    _.findIndex(user.followers, { username: req.auth.user.username }) === -1
+  ) {
     await User.findByIdAndUpdate(req.params.id, {
-      $push: { followers: req.params.userId },
+      $push: { followers: req.auth.user._id },
     });
-    await User.findByIdAndUpdate(req.params.userId, {
+    await User.findByIdAndUpdate(req.auth.user._id, {
       $push: { following: req.params.id },
     });
   } else {
     await User.findByIdAndUpdate(req.params.id, {
-      $pull: { followers: req.params.userId },
+      $pull: { followers: req.auth.user._id },
     });
-    await User.findByIdAndUpdate(req.params.userId, {
+    await User.findByIdAndUpdate(req.auth.user._id, {
       $pull: { following: req.params.id },
     });
   }
