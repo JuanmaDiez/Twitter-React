@@ -1,32 +1,59 @@
 import { useSelector } from "react-redux";
+import "../modules/tweet.modules.css";
+import like from "../images/like.svg";
+import likeActive from "../images/like-active.svg";
+import deletePic from "../images/delete.svg";
+import _ from "lodash";
 
 function Tweet({ tweet, setSelectedTweetLike, setSelectedTweetDelete }) {
   const user = useSelector((state) => state.user);
 
   return (
     tweet && (
-      <div>
-        <p>{tweet.content}</p>
-        <span>
-          <button
-            onClick={() => {
-              setSelectedTweetLike(tweet._id); //selecciono el tweet a likear
-            }}
-          >
-            {tweet.likes.length}
-          </button>
-        </span>
-        {user.user._id === tweet.author ? ( //solo aparece si el dueño del tweet es el usuario logueado
-          <span>
+      <div className="tweet-container p-4">
+        <div className="d-flex">
+          <img
+            src={`/img/${tweet.author.avatar}`}
+            className="profile-picture"
+            alt="profile-picture"
+          />
+          <div className="ml-3 mr-1">
+            <div className="d-flex justify-content-start">
+              <h6>
+                {tweet.author.firstname} {tweet.author.lastname}
+              </h6>
+              <p>@{tweet.author.username}</p>
+            </div>
+            <p>{tweet.content}</p>
+          </div>
+        </div>
+        <div className="d-flex justify-content-between">
+          <div className="d-flex">
             <button
+              className="action-button"
               onClick={() => {
-                setSelectedTweetDelete(tweet._id); //selecciono el tweet a eliminar
+                setSelectedTweetLike(tweet._id);
               }}
             >
-              Eliminar
+              {_.findIndex(tweet.likes, { username: user.user.username }) ===
+              -1 ? (
+                <img src={like} alt="" />
+              ) : (
+                <img src={likeActive} alt="" />
+              )}
             </button>
-          </span>
-        ) : null}
+            <p>{tweet.likes.length}</p>
+          </div>
+          {tweet.author._id === user.user._id ? (
+            <button
+              onClick={() => {
+                setSelectedTweetDelete(tweet._id);
+              }}
+            >
+              <img src={deletePic} alt="" />
+            </button>
+          ) : null}
+        </div>
       </div>
     )
   );

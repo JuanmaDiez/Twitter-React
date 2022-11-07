@@ -7,7 +7,7 @@ function Menu() {
   const user = useSelector((state) => state.user);
   return (
     <div>
-      <div className="container d-flex flex-column justify-content-between col-2 mt-4">
+      <div className="d-flex flex-column justify-content-between col-2 mt-4">
         <div className="d-flex flex-column justify-content-center justify-content-md-start">
           <i className="fa-brands fa-twitter"></i>
           <div className="d-flex">

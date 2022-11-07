@@ -64,25 +64,25 @@ async function update(req, res) {
 async function followers(req, res) {
   const profileUser = await User.findOne({
     username: req.params.username,
-  })
-    .populate("followers")
-    .populate("following");
+  }).populate([{ path: "following" }, { path: "followers" }]);
+
   return res.json(profileUser);
 }
 
 async function following(req, res) {
   const profileUser = await User.findOne({
     username: req.params.username,
-  })
-    .populate("following")
-    .populate("followers");
+  }).populate([{ path: "followers" }, { path: "following" }]);
   return res.json(profileUser);
 }
 
 async function index(req, res) {
   const profileUser = await User.findOne({
     username: req.params.username,
-  }).populate("tweets");
+  }).populate({
+    path: "tweets",
+    populate: [{ path: "likes" }, { path: "author" }],
+  });
   return res.json(profileUser);
 }
 
