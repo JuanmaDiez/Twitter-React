@@ -5,12 +5,15 @@ import axios from "axios";
 import _ from "lodash";
 import "../modules/followers.modules.css";
 import profile from "../images/profile.svg";
+import Info from "../components/Info";
+import Menu from "../components/Menu";
 
 function Following() {
   const user = useSelector((state) => state.user);
   const params = useParams();
   const [selectUser, setSelectUser] = useState(null); // elijo usuario a seguir
   const [profileOwner, setProfileOwner] = useState(null);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -20,9 +23,10 @@ function Following() {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setProfileOwner(response.data);
+      setToggle(false);
     };
     getData();
-  }, []);
+  }, [toggle]);
 
   useEffect(() => {
     if (selectUser !== null) {
@@ -41,54 +45,59 @@ function Following() {
 
   return (
     profileOwner && (
-      <div className="container col-9 col-md-6">
-        <div>
-          <h3>
-            {profileOwner.firstname} {profileOwner.lastname}{" "}
-          </h3>
-          <p>@{profileOwner.username}</p>
-        </div>
-        <div className="followers-following">
-          <strong>
-            <Link to={`/profile/${profileOwner.username}/followers`}>
-              Followers
-            </Link>
-          </strong>
-          <strong>
-            <Link to={`/profile/${profileOwner.username}/following`}>
-              Followings
-            </Link>
-          </strong>
-        </div>
-        {profileOwner.following.map((following) => {
-          return (
-            <div className="tweet-container p-4 d-flex justify-content-between">
-              <div className="d-flex">
-                <img src={profile} alt="pic" />
-                <div className="tweet-inner-container">
-                  <div className="d-flex justify-content-start">
-                    <h6>
-                      {following.firstname} {following.lastname}
-                    </h6>
-                    <p className="ml-5">@{following.username}</p>
+      <div className="row">
+        <Menu />
+        <div className="container col-9 col-md-6">
+          <div>
+            <h3>
+              {profileOwner.firstname} {profileOwner.lastname}{" "}
+            </h3>
+            <p>@{profileOwner.username}</p>
+          </div>
+          <div className="followers-following">
+            <strong>
+              <Link to={`/profile/${profileOwner.username}/followers`}>
+                Followers
+              </Link>
+            </strong>
+            <strong>
+              <Link to={`/profile/${profileOwner.username}/following`}>
+                Followings
+              </Link>
+            </strong>
+          </div>
+          {profileOwner.following.map((following) => {
+            return (
+              <div className="tweet-container p-4 d-flex justify-content-between">
+                <div className="d-flex">
+                  <img src={profile} alt="pic" />
+                  <div className="tweet-inner-container">
+                    <div className="d-flex justify-content-start">
+                      <h6>
+                        {following.firstname} {following.lastname}
+                      </h6>
+                      <p className="ml-5">@{following.username}</p>
+                    </div>
                   </div>
                 </div>
+                <button
+                  className="btn follow-button w-5"
+                  onClick={() => {
+                    setSelectUser(following._id); //elijo el usuario a seguir o dejar de seguir
+                    setToggle(true);
+                  }}
+                >
+                  {_.findIndex(profileOwner.following, {
+                    username: following.username,
+                  }) === -1
+                    ? "Follow"
+                    : "Unfollow"}
+                </button>
               </div>
-              <button
-                className="btn follow-button w-5"
-                onClick={() => {
-                  setSelectUser(following._id); //elijo el usuario a seguir o dejar de seguir
-                }}
-              >
-                {_.findIndex(user.following, {
-                  username: following.username,
-                }) === -1
-                  ? "Follow"
-                  : "Unfollow"}
-              </button>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <Info />
       </div>
     )
   );

@@ -11,7 +11,9 @@ function Home() {
   const [tweetList, setTweetList] = useState([]);
   const user = useSelector((state) => state.user);
   const [selectedTweetLike, setSelectedTweetLike] = useState(null); // Lo mismo para el like
-  const [toggle, setToggle] = useState(false)
+  const [selectedTweetDelete, setSelectedTweetDelete] = useState(null);
+  const [toggle, setToggle] = useState(false);
+
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
@@ -21,9 +23,24 @@ function Home() {
       });
       setTweetList(response.data);
     };
-    setToggle(false)
+    setToggle(false);
     getData();
   }, [toggle]);
+
+  useEffect(() => {
+    if (selectedTweetDelete !== null) {
+      //Solo se ejecuta si hay un tweet seleccionado
+      const deleteTweet = async () => {
+        await axios({
+          url: `http://localhost:8000/tweet/${selectedTweetDelete}`, //sumo a la url el id del tweet
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${user.token}` },
+        }); //Llamada con el metodo delete
+        setSelectedTweetDelete(null); // vuelvo a setear el tweet como nulo para poder eliminar otro
+      };
+      deleteTweet();
+    }
+  }, [selectedTweetDelete]);
 
   useEffect(() => {
     if (selectedTweetLike !== null) {
@@ -40,6 +57,16 @@ function Home() {
     }
   }, [selectedTweetLike]);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await axios({
+      url: "http://localhost:8000",
+      method: "POST",
+      data: { content: event.target.content.value },
+      headers: { Authorization: `Bearer ${user.token}` },
+    });
+  };
+
   return (
     tweetList.length && (
       <div className="row">
@@ -53,7 +80,12 @@ function Home() {
                 className="profile-picture"
                 alt="profile-picture"
               />
-              <form action="/" method="POST" className="w-100">
+              <form
+                action="/"
+                method="POST"
+                className="w-100"
+                onSubmit={handleSubmit}
+              >
                 <textarea
                   name="content"
                   className="form-control textarea"
@@ -63,7 +95,9 @@ function Home() {
                 ></textarea>
 
                 <div className="d-flex justify-content-end">
-                  <button className="tweet-button">Tweet</button>
+                  <button className="tweet-button" type="submit">
+                    Tweet
+                  </button>
                 </div>
               </form>
             </div>
@@ -72,6 +106,8 @@ function Home() {
                 <Tweet
                   tweet={tweet}
                   setSelectedTweetLike={setSelectedTweetLike}
+                  setSelectedTweetDelete={setSelectedTweetDelete}
+                  setToggle={setToggle}
                 />
               );
             })}

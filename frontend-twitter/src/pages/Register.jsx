@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { register } from "../redux/userSlice";
 import "../modules/register.modules.css";
 import twitter from "../images/twitter.png";
 import axios from "axios";

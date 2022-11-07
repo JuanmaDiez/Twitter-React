@@ -1,10 +1,19 @@
 import "../modules/menu.modules.css";
 import write from "../images/write.svg";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice";
 
 function Menu() {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   return (
     <div className="d-flex flex-column justify-content-between col-2 mt-4">
       <div className="d-flex flex-column justify-content-center justify-content-md-start">
@@ -31,7 +40,9 @@ function Menu() {
           Tweet
         </button>
       </div>
-      <a href="/logout">Log out</a>
+      <p onClick={handleClick} className="btn btn-danger">
+        Log out
+      </p>
       {/* <script
           src="https://kit.fontawesome.com/9895568d5a.js"
           crossOrigin="anonymous"
