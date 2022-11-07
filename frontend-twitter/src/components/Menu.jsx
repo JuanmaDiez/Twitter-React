@@ -1,8 +1,10 @@
 import "../modules/menu.modules.css";
 import write from "../images/write.svg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Menu() {
+  const user = useSelector((state) => state.user);
   return (
     <div>
       <div className="container d-flex flex-column justify-content-between col-2 mt-4">
@@ -12,13 +14,16 @@ function Menu() {
             <a href="/">
               <i className="fa-solid fa-house"></i>
             </a>
-            <span className="span-menu d-none d-md-block">Home</span>
+            <span className="span-menu d-none d-md-block">
+              <Link to={"/"}>Home </Link>
+            </span>
           </div>
           <div className="d-flex">
-            <Link to={"/"}>Home </Link>
             <i className="fa-regular fa-user"></i>
 
-            <span className="span-menu d-none d-md-block">Profile</span>
+            <span className="span-menu d-none d-md-block">
+              <Link to={`/profile/${user.user.username}`}>Profile</Link>
+            </span>
           </div>
           <button className="d-sm-block d-md-none d-lg-none">
             <img src={write} alt="" />
