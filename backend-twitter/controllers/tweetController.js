@@ -7,7 +7,7 @@ async function index(req, res) {
   const followingTweets = await Tweet.find({
     user: { $in: loggedUser.following },
   })
-    .populate("author")
+    .populate([{ path: "author" }, { path: "likes" }])
     .sort({ createdAt: "desc" })
     .limit(20);
   return res.status(201).json(followingTweets);
