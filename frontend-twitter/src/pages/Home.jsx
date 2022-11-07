@@ -41,9 +41,9 @@ function Home() {
 
   return (
     tweetList.length && (
-      <div className="container d-flex">
+      <div className="row">
         <Menu />
-        <div>
+        <div class="col-9 col-md-6">
           <div className="d-flex flex-column px-4">
             <h2 className="home-title mb-3 mt-1">Home</h2>
             <div className="form-floating d-flex">
@@ -68,7 +68,10 @@ function Home() {
             </div>
             {tweetList.map((tweet) => {
               return (
-                <Tweet tweet={tweet} setSelectedTweetLike={setSelectedTweetLike} />
+                <Tweet
+                  tweet={tweet}
+                  setSelectedTweetLike={setSelectedTweetLike}
+                />
               );
             })}
           </div>

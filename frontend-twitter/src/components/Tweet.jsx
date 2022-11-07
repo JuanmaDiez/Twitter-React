@@ -7,7 +7,7 @@ import _ from "lodash";
 
 function Tweet({ tweet, setSelectedTweetLike, setSelectedTweetDelete }) {
   const user = useSelector((state) => state.user);
-
+  console.log(tweet);
   return (
     tweet && (
       <div className="tweet-container p-4">
@@ -24,7 +24,7 @@ function Tweet({ tweet, setSelectedTweetLike, setSelectedTweetDelete }) {
               </h6>
               <p>@{tweet.author.username}</p>
             </div>
-            <p>{tweet.content}</p>
+            <p className="text-start">{tweet.content}</p>
           </div>
         </div>
         <div className="d-flex justify-content-between">
