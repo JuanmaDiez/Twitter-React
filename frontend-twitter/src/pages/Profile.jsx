@@ -13,6 +13,7 @@ function Profile() {
   const params = useParams();
   const [selectedTweetDelete, setSelectedTweetDelete] = useState(null); //Seteo el tweet seleccionado para eliminar
   const [selectedTweetLike, setSelectedTweetLike] = useState(null); // Lo mismo para el like
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -22,10 +23,11 @@ function Profile() {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setProfileOwner(response.data);
+      setToggle(false);
     };
 
     getData();
-  }, []);
+  }, [toggle]);
 
   useEffect(() => {
     if (selectedTweetDelete !== null) {
@@ -99,6 +101,7 @@ function Profile() {
                 key={tweet._id}
                 setSelectedTweetDelete={setSelectedTweetDelete}
                 setSelectedTweetLike={setSelectedTweetLike}
+                setToggle={setToggle}
               />
             );
           })}

@@ -19,6 +19,19 @@ function Menu() {
         </div>
         <div className="d-flex">
           <i className="fa-regular fa-user"></i>
+    <div className="d-flex flex-column justify-content-between col-2 mt-4">
+      <div className="d-flex flex-column justify-content-center justify-content-md-start">
+        <i className="fa-brands fa-twitter"></i>
+        <div className="d-flex">
+          <a href="/">
+            <i className="fa-solid fa-house"></i>
+          </a>
+          <span className="span-menu d-none d-md-block">
+            <Link to={"/"}>Home </Link>
+          </span>
+        </div>
+        <div className="d-flex">
+          <i className="fa-regular fa-user"></i>
 
           <span className="span-menu d-none d-md-block">
             <Link to={`/profile/${user.user.username}`}>Profile</Link>

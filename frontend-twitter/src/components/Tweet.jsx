@@ -5,7 +5,12 @@ import likeActive from "../images/like-active.svg";
 import deletePic from "../images/delete.svg";
 import _ from "lodash";
 
-function Tweet({ tweet, setSelectedTweetLike, setSelectedTweetDelete }) {
+function Tweet({
+  tweet,
+  setSelectedTweetLike,
+  setSelectedTweetDelete,
+  setToggle,
+}) {
   const user = useSelector((state) => state.user);
   console.log(tweet);
   return (
@@ -33,6 +38,7 @@ function Tweet({ tweet, setSelectedTweetLike, setSelectedTweetDelete }) {
               className="action-button"
               onClick={() => {
                 setSelectedTweetLike(tweet._id);
+                setToggle(true);
               }}
             >
               {_.findIndex(tweet.likes, { username: user.user.username }) ===
@@ -48,6 +54,7 @@ function Tweet({ tweet, setSelectedTweetLike, setSelectedTweetDelete }) {
             <button
               onClick={() => {
                 setSelectedTweetDelete(tweet._id);
+                setToggle(true);
               }}
             >
               <img src={deletePic} alt="" />
