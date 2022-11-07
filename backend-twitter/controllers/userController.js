@@ -11,8 +11,6 @@ function store(req, res) {
     keepExtensions: true,
   });
   form.parse(req, async (err, fields, files) => {
-    console.log(fields);
-    console.log(files);
     const newUser = new User({
       firstname: fields.firstName,
       lastname: fields.lastName,

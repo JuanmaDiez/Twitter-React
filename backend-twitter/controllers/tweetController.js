@@ -33,6 +33,9 @@ async function store(req, res) {
     content: req.body.content,
   });
   await newTweet.save();
+  await User.findByIdAndUpdate(req.auth.user._id, {
+    $push: { tweets: newTweet._id },
+  });
   return res.json(newTweet);
 }
 
