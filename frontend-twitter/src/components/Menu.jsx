@@ -15,7 +15,7 @@ function Menu() {
   };
 
   return (
-    <div className="d-flex flex-column justify-content-between col-2 mt-4">
+    <div className="d-flex flex-column justify-content-between col-2 mt-4 menu">
       <div className="d-flex flex-column justify-content-center justify-content-md-start">
         <i className="fa-brands fa-twitter"></i>
         <div className="d-flex">
@@ -23,14 +23,21 @@ function Menu() {
             <i className="fa-solid fa-house"></i>
           </a>
           <span className="span-menu d-none d-md-block">
-            <Link to={"/"}>Home </Link>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              Home{" "}
+            </Link>
           </span>
         </div>
         <div className="d-flex">
           <i className="fa-regular fa-user"></i>
 
           <span className="span-menu d-none d-md-block">
-            <Link to={`/profile/${user.user.username}`}>Profile</Link>
+            <Link
+              to={`/profile/${user.user.username}`}
+              style={{ textDecoration: "none" }}
+            >
+              Profile
+            </Link>
           </span>
         </div>
         <button className="d-sm-block d-md-none d-lg-none">
@@ -43,10 +50,6 @@ function Menu() {
       <p onClick={handleClick} className="btn btn-danger">
         Log out
       </p>
-      {/* <script
-          src="https://kit.fontawesome.com/9895568d5a.js"
-          crossOrigin="anonymous"
-        ></script> */}
     </div>
   );
 }

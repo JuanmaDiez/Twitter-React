@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { login } from "../redux/userSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../modules/login.modules.css";
 import twitter from "../images/twitter.png";
 
@@ -35,12 +35,12 @@ function Login() {
     <section className="vh-100" style={{ backgroundColor: "#0c476f" }}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col col-xl-10">
-            <div className="card" style={{ overflow: "hidden" }}>
-              <div className="row g-0">
-                <div id="divIzq" className="col-md-6 col-lg-7 d-none d-md-flex">
+          <div className="col col-xl-10 h-100">
+            <div className="card h-100" style={{ overflow: "hidden" }}>
+              <div className="row g-0 h-100">
+                <div id="divIzq" className="col-md-6 col-lg-7 d-none d-md-flex h-100 justify-content-between">
                   <img id="logoTwitter" src={twitter} alt="" />
-                  <p id="welcomeHey">Hey! Nice to see you again 🥰</p>
+                  <p id="welcomeHey" className="d-flex flex-column-reverse me-2">Hey! Nice to see you again 🥰</p>
                 </div>
                 <div className="col-md-6 col-lg-5 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
@@ -101,10 +101,10 @@ function Login() {
                         className="SignIn mb-5 pb-lg-2"
                         style={{ color: "#040404" }}
                       >
-                        Don't have an account?
-                        <a href="/register" style={{ color: "#040404" }}>
+                        Don't have an account?{" "}
+                        <Link to="/register" style={{ color: "#040404", textDecoration: "none" }}>
                           Sign up
-                        </a>
+                        </Link>
                       </p>
                     </form>
                   </div>

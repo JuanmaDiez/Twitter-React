@@ -2,49 +2,60 @@ import "../modules/register.modules.css";
 import twitter from "../images/twitter.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../redux/userSlice";
 
 function Register() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    await axios({
+    const response = await axios({
       url: "http://localhost:8000/register",
       method: "POST",
       data: formData,
       headers: { "Content-Type": "mulipart/form-data" },
     });
+    dispatch(register(response.data));
     navigate("/login");
   };
   return (
     <section className="vh-100" style={{ backgroundColor: "#0c476f" }}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col col-xl-10">
-            <div className="card" style={{ overflow: "hidden" }}>
-              <div className="row g-0">
-                <div id="divIzq" className="col-md-6 col-lg-7 d-none d-md-flex">
+          <div className="col col-xl-10 h-100">
+            <div className="card h-100" style={{ overflow: "hidden" }}>
+              <div className="row g-0 h-100">
+                <div
+                  id="divIzq"
+                  className="col-md-6 col-lg-7 d-none d-md-flex h-100 justify-content-between"
+                >
                   <img id="logoTwitter" src={twitter} alt="" />
-                  <p id="welcome">Hi! Welcome to Twitter Clone 👋</p>
+                  <p id="welcome" className="d-flex flex-column-reverse me-2">
+                    Hi! Welcome to Twitter Clone 👋
+                  </p>
                 </div>
-                <div className="col-md-6 col-lg-5 d-flex align-items-center">
-                  <div className="card-body p-4 p-lg-5 text-black">
+                <div className="col-md-6 col-lg-5 d-flex align-items-center h-100">
+                  <div className="card-body p-4 p-lg-5 text-black h-100">
                     <form
-                      action="/register"
-                      method="post"
-                      onSubmit={handleSubmit}
+                      className="h-100"
+                      onSubmit={(event) => {
+                        handleSubmit(event);
+                      }}
                     >
-                      <div className="d-flex align-items-center mb-3 pb-1">
-                        <span className="h1 fw-bold mb-0">Sign up</span>
+                      <div className="d-flex align-items-center pb-1">
+                        <span className="h3 fw-bold mb-0">Sign up</span>
                       </div>
                       <h6
-                        className="fw-normal mb-3 pb-3"
+                        className="fw-normal pb-3"
                         style={{ letterSpacing: "1px" }}
                       >
-                        Create and account and star using Twitter
+                        Create and account and start using Twitter
                       </h6>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline">
                         <input
                           placeholder="First name"
                           name="firstName"
@@ -55,7 +66,7 @@ function Register() {
                         />
                       </div>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline">
                         <input
                           placeholder="Last name"
                           name="lastName"
@@ -66,7 +77,7 @@ function Register() {
                         />
                       </div>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline">
                         <input
                           placeholder="Email"
                           name="email"
@@ -77,7 +88,7 @@ function Register() {
                         />
                       </div>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline">
                         <input
                           placeholder="Username"
                           name="userName"
@@ -88,7 +99,7 @@ function Register() {
                         />
                       </div>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline">
                         <input
                           placeholder="Choose file..."
                           className="form-control"
@@ -99,7 +110,7 @@ function Register() {
                         />
                       </div>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline">
                         <input
                           placeholder="Password"
                           name="password"
@@ -109,7 +120,7 @@ function Register() {
                           required
                         />
                       </div>
-                      <div className="form-outline mb-4">
+                      <div className="form-outline">
                         <input
                           placeholder="Repeat Password"
                           name="repeatPassword"
@@ -120,7 +131,7 @@ function Register() {
                         />
                       </div>
 
-                      <div className="pt-1 mb-4">
+                      <div className="pt-1">
                         <div className="d-grid gap-2">
                           <button
                             id="buttonSignUp"
