@@ -20,8 +20,8 @@ function store(req, res) {
       password: fields.password,
     });
     await newUser.save();
+    return res.json(newUser);
   });
-  return res.json(newUser);
 }
 
 async function token(req, res) {
