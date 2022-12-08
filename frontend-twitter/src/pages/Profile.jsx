@@ -18,7 +18,7 @@ function Profile() {
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
-        url: `http://localhost:8000/profile/${params.username}`,
+        url: `http://localhost:8000/users/${params.username}`,
         method: "GET",
         headers: { Authorization: `Bearer ${user.token}` },
       });

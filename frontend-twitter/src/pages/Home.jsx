@@ -17,7 +17,7 @@ function Home() {
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
-        url: "http://localhost:8000",
+        url: "http://localhost:8000/tweets",
         method: "GET",
         headers: { Authorization: `Bearer ${user.token}` },
       });
@@ -32,7 +32,7 @@ function Home() {
       //Solo se ejecuta si hay un tweet seleccionado
       const deleteTweet = async () => {
         await axios({
-          url: `http://localhost:8000/tweet/${selectedTweetDelete}`, //sumo a la url el id del tweet
+          url: `http://localhost:8000/tweets/${selectedTweetDelete}`, //sumo a la url el id del tweet
           method: "DELETE",
           headers: { Authorization: `Bearer ${user.token}` },
         }); //Llamada con el metodo delete
@@ -47,7 +47,7 @@ function Home() {
       console.log(selectedTweetLike);
       const like = async () => {
         await axios({
-          url: `http://localhost:8000/tweet/${selectedTweetLike}`,
+          url: `http://localhost:8000/tweets/${selectedTweetLike}`,
           method: "PATCH",
           headers: { Authorization: `Bearer ${user.token}` },
         });
@@ -60,7 +60,7 @@ function Home() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios({
-      url: "http://localhost:8000",
+      url: "http://localhost:8000/tweets",
       method: "POST",
       data: { content: event.target.content.value },
       headers: { Authorization: `Bearer ${user.token}` },
@@ -69,51 +69,53 @@ function Home() {
 
   return (
     tweetList.length && (
-      <div className="row">
-        <Menu />
-        <div class="col-9 col-md-6">
-          <div className="d-flex flex-column px-4">
-            <h2 className="home-title mb-3 mt-1">Home</h2>
-            <div className="form-floating d-flex">
-              <img
-                src={profile}
-                className="profile-picture"
-                alt="profile-picture"
-              />
-              <form
-                action="/"
-                method="POST"
-                className="w-100"
-                onSubmit={handleSubmit}
-              >
-                <textarea
-                  name="content"
-                  className="form-control textarea"
-                  placeholder="Whats happening?"
-                  id="floatingTextarea2"
-                  style={{ height: "100px" }}
-                ></textarea>
-
-                <div className="d-flex justify-content-end">
-                  <button className="tweet-button" type="submit">
-                    Tweet
-                  </button>
-                </div>
-              </form>
-            </div>
-            {tweetList.map((tweet) => {
-              return (
-                <Tweet
-                  tweet={tweet}
-                  setSelectedTweetLike={setSelectedTweetLike}
-                  setSelectedTweetDelete={setSelectedTweetDelete}
-                  setToggle={setToggle}
+      <div className="container-fluid">
+        <div className="row justify-content-center">
+          <Menu />
+          <div class="col-9 col-md-6">
+            <div className="d-flex flex-column px-4">
+              <h3 className="mb-3 mt-1 d-flex justify-content-start">Home</h3>
+              <div className="form-floating d-flex">
+                <img
+                  src={profile}
+                  className="profile-picture"
+                  alt="profile-picture"
                 />
-              );
-            })}
+                <form
+                  action="/"
+                  method="POST"
+                  className="w-100"
+                  onSubmit={(event) => handleSubmit(event)}
+                >
+                  <textarea
+                    name="content"
+                    className="form-control textarea"
+                    placeholder="Whats happening?"
+                    id="floatingTextarea2"
+                    style={{ height: "100px" }}
+                  ></textarea>
+
+                  <div className="d-flex justify-content-end">
+                    <button className="tweet-button" type="submit">
+                      Tweet
+                    </button>
+                  </div>
+                </form>
+              </div>
+              {tweetList.map((tweet) => {
+                return (
+                  <Tweet
+                    tweet={tweet}
+                    setSelectedTweetLike={setSelectedTweetLike}
+                    setSelectedTweetDelete={setSelectedTweetDelete}
+                    setToggle={setToggle}
+                  />
+                );
+              })}
+            </div>
           </div>
+          <Info />
         </div>
-        <Info />
       </div>
     )
   );

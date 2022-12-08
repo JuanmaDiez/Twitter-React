@@ -9,7 +9,7 @@ tweetRouter.use(
 );
 tweetRouter.get("/", tweetController.index);
 tweetRouter.post("/", tweetController.store);
-tweetRouter.delete("/tweet/:tweetId", tweetController.destroy);
-tweetRouter.patch("/tweet/:tweetId", tweetController.update);
+tweetRouter.delete("/:tweetId", tweetController.destroy);
+tweetRouter.patch("/:tweetId", tweetController.update);
 
 module.exports = tweetRouter;

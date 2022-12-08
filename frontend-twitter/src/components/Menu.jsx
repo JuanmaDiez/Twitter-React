@@ -15,7 +15,7 @@ function Menu() {
   };
 
   return (
-    <div className="d-flex flex-column justify-content-between col-2 mt-4 menu">
+    <div className="d-flex flex-column justify-content-between col-2 menu">
       <div className="d-flex flex-column justify-content-center justify-content-md-start">
         <i className="fa-brands fa-twitter"></i>
         <div className="d-flex">
@@ -47,9 +47,23 @@ function Menu() {
           Tweet
         </button>
       </div>
-      <p onClick={handleClick} className="btn btn-danger">
-        Log out
-      </p>
+      <div onClick={handleClick} className="d-flex justify-content-around logout mb-4">
+        <img
+          src={`http://localhost:8000/img/${user.user.avatar}`}
+          alt=""
+          className="img-fluid pb-3"
+        />
+        <div className="d-flex flex-column justify-content-center">
+          <p>
+            {user.user.username}
+          </p>
+          <p>
+            <strong>
+              {user.user.firstname}
+            </strong>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

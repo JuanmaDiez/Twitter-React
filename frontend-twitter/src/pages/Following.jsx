@@ -18,7 +18,7 @@ function Following() {
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
-        url: `http://localhost:8000/profile/${params.username}/following`,
+        url: `http://localhost:8000/users/${params.username}/following`,
         method: "get",
         headers: { Authorization: `Bearer ${user.token}` },
       });
@@ -33,7 +33,7 @@ function Following() {
       console.log(selectUser);
       const follow = async () => {
         await axios({
-          url: `http://localhost:8000/${selectUser}`, //Agrego el id del usuario en la llamada
+          url: `http://localhost:8000/users/${selectUser}`, //Agrego el id del usuario en la llamada
           method: "PATCH",
           headers: { Authorization: `Bearer ${user.token}` },
         });

@@ -2,6 +2,6 @@ const userRouter = require("./userRoutes"); // Traemos todos los archivos de rut
 const tweetRouter = require("./tweetRoutes"); // Traemos todos los archivos de rutas privadas.
 
 module.exports = (app) => {
-  app.use(userRouter);
-  app.use(tweetRouter);
+  app.use("/users", userRouter);
+  app.use("/tweets", tweetRouter);
 };

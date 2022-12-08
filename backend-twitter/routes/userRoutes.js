@@ -5,11 +5,11 @@ const userRouter = express.Router();
 const userController = require("../controllers/userController");
 
 userRouter.post("/login", userController.token);
-userRouter.post("/register", userController.store);
+userRouter.post("/", userController.store);
 userRouter.use(checkJwt({ secret: JWT_STRING_SECRETO, algorithms: ["HS256"] }))
-userRouter.get( "/profile/:username",userController.index);
-userRouter.get( "/profile/:username/followers",userController.followers);
-userRouter.get("/profile/:username/following", userController.following);
+userRouter.get( "/:username",userController.index);
+userRouter.get( "/:username/followers",userController.followers);
+userRouter.get("/:username/following", userController.following);
 userRouter.patch("/:id",userController.update);
 
 module.exports = userRouter;

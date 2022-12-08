@@ -17,7 +17,7 @@ function Login() {
       const getToken = async () => {
         try {
           const response = await axios({
-            url: "http://localhost:8000/login",
+            url: "http://localhost:8000/users/login",
             method: "POST",
             data: { email: email, password: password },
           });

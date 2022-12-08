@@ -12,7 +12,7 @@ function Tweet({
   setToggle,
 }) {
   const user = useSelector((state) => state.user);
-  console.log(tweet);
+  
   return (
     tweet && (
       <div className="tweet-container p-4">
