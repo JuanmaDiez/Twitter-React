@@ -4,6 +4,7 @@ import like from "../images/like.svg";
 import likeActive from "../images/like-active.svg";
 import deletePic from "../images/delete.svg";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 function Tweet({
   tweet,
@@ -12,7 +13,7 @@ function Tweet({
   setToggle,
 }) {
   const user = useSelector((state) => state.user);
-  
+
   return (
     tweet && (
       <div className="tweet-container p-4">
@@ -24,41 +25,56 @@ function Tweet({
           />
           <div className="ml-3 mr-1">
             <div className="d-flex justify-content-start">
-              <h6>
-                {tweet.author.firstname} {tweet.author.lastname}
-              </h6>
-              <p>@{tweet.author.username}</p>
+              <Link
+                to={`/profile/${tweet.author.username}`}
+                style={{ textDecoration: "none" }}
+              >
+                <h6>
+                  {tweet.author.firstname} {tweet.author.lastname}
+                </h6>
+              </Link>
+              <p className="ms-1">@{tweet.author.username}</p>
             </div>
             <p className="text-start">{tweet.content}</p>
           </div>
         </div>
         <div className="d-flex justify-content-between">
           <div className="d-flex">
-            <button
-              className="action-button"
-              onClick={() => {
-                setSelectedTweetLike(tweet._id);
-                setToggle(true);
-              }}
-            >
-              {_.findIndex(tweet.likes, { username: user.user.username }) ===
-              -1 ? (
-                <img src={like} alt="" />
-              ) : (
-                <img src={likeActive} alt="" />
-              )}
-            </button>
+            {_.findIndex(tweet.likes, { username: user.user.username }) ===
+            -1 ? (
+              <img
+                src={like}
+                alt=""
+                onClick={() => {
+                  setSelectedTweetLike(tweet._id);
+                  setToggle(true);
+                }}
+                className="mb-2 me-1"
+              />
+            ) : (
+              <img
+                src={likeActive}
+                alt=""
+                onClick={() => {
+                  setSelectedTweetLike(tweet._id);
+                  setToggle(true);
+                }}
+                className="mb-2 me-1"
+              />
+            )}
+
             <p>{tweet.likes.length}</p>
           </div>
           {tweet.author._id === user.user._id ? (
-            <button
+            <img
+              src={deletePic}
               onClick={() => {
                 setSelectedTweetDelete(tweet._id);
                 setToggle(true);
               }}
-            >
-              <img src={deletePic} alt="" />
-            </button>
+              alt=""
+              style={{ backgroundColor: "inherit", border: "none" }}
+            />
           ) : null}
         </div>
       </div>

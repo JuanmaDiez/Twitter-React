@@ -60,53 +60,57 @@ function Profile() {
 
   return (
     profileOwner && (
-      <div className="row">
-        <Menu />
-        <div className="profile-container col-sm-9 col-md-6 col-lg-6 container">
-          <header id="profile-header">
-            <img
-              src={`http://localhost:8000/img/${profileOwner.avatar}`}
-              alt="profile-pic"
-              id="profile-image"
-            />
-          </header>
-          <div className="d-flex justify-content-between profile-info mb-5">
-            <h3>
-              {profileOwner.firstname} {profileOwner.lastname}
-            </h3>
-
-            <div className="d-flex justify-content-between profileOwner-info">
-              <p className="mr-2"> {profileOwner.username} </p>
-              <p>
-                <Link
-                  to={`/profile/${profileOwner.username}/following`}
-                  className="mr-2"
-                >
-                  {profileOwner.following.length} Following
-                </Link>
-                <Link
-                  to={`/profile/${profileOwner.username}/followers`}
-                  className="mr-2"
-                >
-                  {profileOwner.followers.length} Followers
-                </Link>
-              </p>
-            </div>
-          </div>
-          <h5>Tweets</h5>
-          {profileOwner.tweets.map((tweet) => {
-            return (
-              <Tweet
-                tweet={tweet}
-                key={tweet._id}
-                setSelectedTweetDelete={setSelectedTweetDelete}
-                setSelectedTweetLike={setSelectedTweetLike}
-                setToggle={setToggle}
+      <div className="container-fluid">
+        <div className="row justify-content-center">
+          <Menu />
+          <div className="profile-container col-sm-9 col-md-6 col-lg-6 container">
+            <header id="profile-header">
+              <img
+                src={`http://localhost:8000/img/${profileOwner.avatar}`}
+                alt="profile-pic"
+                id="profile-image"
               />
-            );
-          })}
+            </header>
+            <div className="d-flex justify-content-between profile-info mb-5">
+              <h3>
+                {profileOwner.firstname} {profileOwner.lastname}
+              </h3>
+
+              <div className="d-flex justify-content-between profileOwner-info">
+                <p className="me-1"> @{profileOwner.username} </p>
+                <p>
+                  <Link
+                    to={`/profile/${profileOwner.username}/following`}
+                    className="me-1"
+                    style={{ textDecoration: "none" }}
+                  >
+                    {profileOwner.following.length} Following
+                  </Link>
+                  <Link
+                    to={`/profile/${profileOwner.username}/followers`}
+                    className="me-1"
+                    style={{ textDecoration: "none" }}
+                  >
+                    {profileOwner.followers.length} Followers
+                  </Link>
+                </p>
+              </div>
+            </div>
+            <h5>Tweets</h5>
+            {profileOwner.tweets.map((tweet) => {
+              return (
+                <Tweet
+                  tweet={tweet}
+                  key={tweet._id}
+                  setSelectedTweetDelete={setSelectedTweetDelete}
+                  setSelectedTweetLike={setSelectedTweetLike}
+                  setToggle={setToggle}
+                />
+              );
+            })}
+          </div>
+          <Info />
         </div>
-        <Info />
       </div>
     )
   );
