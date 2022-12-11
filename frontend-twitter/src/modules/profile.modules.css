@@ -15,8 +15,8 @@
   border-radius: 50%;
   z-index: 1;
   position: relative;
-  top: 120px;
-  right: 250px;
+  top: 70%;
+  right: 38%;
   height: 6rem;
   width: 6rem;
 }
@@ -30,4 +30,18 @@
 h3,
 h5 {
   margin-left: 1rem;
+}
+.follow-button {
+  background: #1d9bf0;
+  border: none;
+  padding: 5px 18px 5px 18px;
+  margin-top: 12px;
+  border-radius: 45px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  color: #ffffff;
 }

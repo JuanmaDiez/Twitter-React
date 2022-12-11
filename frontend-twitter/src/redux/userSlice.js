@@ -7,14 +7,36 @@ const userSlice = createSlice({
     login(state, action) {
       return { ...action.payload };
     },
+    follow(state, action) {
+      if (
+        state.user.following.find((follow) => {
+          return follow._id === action.payload._id;
+        })
+      ) {
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            following: state.user.following.filter((follow) => {
+              return follow._id !== action.payload._id;
+            }),
+          },
+        };
+      } else {
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            following: [...state.user.following, action.payload],
+          },
+        };
+      }
+    },
     logout(state, action) {
       state = {};
-    },
-    register(state, action) {
-      return { ...action.payload };
     },
   },
 });
 
-export const { login, logout, register } = userSlice.actions;
+export const { login, follow, logout } = userSlice.actions;
 export default userSlice.reducer;

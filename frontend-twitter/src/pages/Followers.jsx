@@ -47,36 +47,48 @@ function Followers() {
       <div className="container-fluid">
         <div className="row justify-content-center">
           <Menu />
-          <div className="container col-9 col-md-6 mt-1">
+          <div className="col-9 col-md-6 mt-1">
             <div>
               <h3>
                 {profileOwner.firstname} {profileOwner.lastname}
               </h3>
               <p> {profileOwner.username} </p>
             </div>
-            <div className="followers-following">
-              <strong>
-                <Link to={`/profile/${profileOwner.username}/followers`}>
-                  Followers
-                </Link>
-              </strong>
-              <strong>
-                <Link to={`/profile/${profileOwner.username}/following`}>
-                  Following
-                </Link>
-              </strong>
+            <div className="followers-following mb-3">
+              <Link
+                to={`/profile/${profileOwner.username}/followers`}
+                style={{ textDecoration: "none" }}
+                className="links location"
+              >
+                <strong>Followers</strong>
+              </Link>
+              <Link
+                to={`/profile/${profileOwner.username}/following`}
+                style={{ textDecoration: "none" }}
+                className="links"
+              >
+                <strong>Following</strong>
+              </Link>
             </div>
             {profileOwner.followers.map((follower) => {
               return (
                 <div className="tweet-container p-4 d-flex justify-content-between">
                   <div className="d-flex">
-                    <img src={profile} alt="pic" />
+                    <img
+                      src={`http://localhost:8000/img/${profileOwner.avatar}`}
+                      alt="pic"
+                    />
                     <div className="tweet-inner-container">
                       <div className="d-flex justify-content-start">
                         <h6>
-                          {follower.firstname} {follower.lastname}
+                          <Link
+                            to={`/profile/${follower.username}`}
+                            style={{ textDecoration: "none" }}
+                          >
+                            {follower.firstname} {follower.lastname}
+                          </Link>
                         </h6>
-                        <p className="ml-5">@{follower.username}</p>
+                        <p className="ms-2">@{follower.username}</p>
                       </div>
                     </div>
                   </div>

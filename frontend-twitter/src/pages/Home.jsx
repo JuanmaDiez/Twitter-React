@@ -1,18 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Menu from "../components/Menu";
 import Info from "../components/Info";
 import Tweet from "../components/Tweet";
-import profile from "../images/profile.svg";
 import "../modules/home.modules.css";
+import { add_tweet, call_tweets } from "../redux/tweetSlice";
 
 function Home() {
-  const [tweetList, setTweetList] = useState([]);
   const user = useSelector((state) => state.user);
-  const [selectedTweetLike, setSelectedTweetLike] = useState(null); // Lo mismo para el like
-  const [selectedTweetDelete, setSelectedTweetDelete] = useState(null);
-  const [toggle, setToggle] = useState(false);
+  const tweets = useSelector((state) => state.tweets);
+  const dispatch = useDispatch();
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     const getData = async () => {
@@ -21,54 +20,25 @@ function Home() {
         method: "GET",
         headers: { Authorization: `Bearer ${user.token}` },
       });
-      setTweetList(response.data);
+      dispatch(call_tweets(response.data));
     };
-    setToggle(false);
     getData();
-  }, [toggle]);
-
-  useEffect(() => {
-    if (selectedTweetDelete !== null) {
-      //Solo se ejecuta si hay un tweet seleccionado
-      const deleteTweet = async () => {
-        await axios({
-          url: `http://localhost:8000/tweets/${selectedTweetDelete}`, //sumo a la url el id del tweet
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${user.token}` },
-        }); //Llamada con el metodo delete
-        setSelectedTweetDelete(null); // vuelvo a setear el tweet como nulo para poder eliminar otro
-      };
-      deleteTweet();
-    }
-  }, [selectedTweetDelete]);
-
-  useEffect(() => {
-    if (selectedTweetLike !== null) {
-      console.log(selectedTweetLike);
-      const like = async () => {
-        await axios({
-          url: `http://localhost:8000/tweets/${selectedTweetLike}`,
-          method: "PATCH",
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
-        setSelectedTweetLike(null);
-      };
-      like();
-    }
-  }, [selectedTweetLike]);
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios({
       url: "http://localhost:8000/tweets",
       method: "POST",
-      data: { content: event.target.content.value },
+      data: { content },
       headers: { Authorization: `Bearer ${user.token}` },
     });
+    dispatch(add_tweet({ content, author: { ...user.user }, likes: [] }));
+    await setContent("");
   };
 
   return (
-    tweetList.length && (
+    tweets.length && (
       <div className="container-fluid">
         <div className="row justify-content-center">
           <Menu />
@@ -77,9 +47,9 @@ function Home() {
               <h3 className="mb-3 mt-1 d-flex justify-content-start">Home</h3>
               <div className="form-floating d-flex">
                 <img
-                  src={profile}
+                  src={`http://localhost:8000/img/${user.user.avatar}`}
                   className="profile-picture"
-                  alt="profile-picture"
+                  alt="avatar"
                 />
                 <form
                   action="/"
@@ -91,6 +61,8 @@ function Home() {
                     name="content"
                     className="form-control textarea"
                     placeholder="Whats happening?"
+                    value={content}
+                    onChange={(event) => setContent(event.target.value)}
                     id="floatingTextarea2"
                     style={{ height: "100px" }}
                   ></textarea>
@@ -102,15 +74,8 @@ function Home() {
                   </div>
                 </form>
               </div>
-              {tweetList.map((tweet) => {
-                return (
-                  <Tweet
-                    tweet={tweet}
-                    setSelectedTweetLike={setSelectedTweetLike}
-                    setSelectedTweetDelete={setSelectedTweetDelete}
-                    setToggle={setToggle}
-                  />
-                );
+              {tweets.map((tweet) => {
+                return <Tweet tweet={tweet} key={tweet._id} />;
               })}
             </div>
           </div>
