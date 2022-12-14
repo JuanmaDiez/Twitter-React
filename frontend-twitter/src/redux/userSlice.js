@@ -9,31 +9,26 @@ const userSlice = createSlice({
     },
     follow(state, action) {
       if (
-        state.user.following.find((follow) => {
-          return follow._id === action.payload._id;
+        state.following.find((follow) => {
+          return follow === action.payload;
         })
       ) {
         return {
           ...state,
-          user: {
-            ...state.user,
-            following: state.user.following.filter((follow) => {
-              return follow._id !== action.payload._id;
-            }),
-          },
+
+          following: state.following.filter((follow) => {
+            return follow !== action.payload;
+          }),
         };
       } else {
         return {
           ...state,
-          user: {
-            ...state.user,
-            following: [...state.user.following, action.payload],
-          },
+          following: [...state.following, action.payload],
         };
       }
     },
     logout(state, action) {
-      state = {};
+      return {};
     },
   },
 });

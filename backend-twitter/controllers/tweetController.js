@@ -3,7 +3,7 @@ const User = require("../models/User");
 const _ = require("lodash");
 
 async function index(req, res) {
-  const loggedUser = await User.findById(req.auth.user._id);
+  const loggedUser = await User.findById(req.auth.id);
   const followingTweets = await Tweet.find({
     user: { $in: loggedUser.following },
   })
@@ -14,14 +14,18 @@ async function index(req, res) {
 }
 
 async function update(req, res) {
-  const tweet = await Tweet.findById(req.params.tweetId).populate("likes");
-  if (_.findIndex(tweet.likes, { username: req.auth.user.username }) === -1) {
+  const tweet = await Tweet.findById(req.params.tweetId);
+  if (
+    _.findIndex(tweet.likes, (user) => {
+      return user.toString() === req.auth.id;
+    }) === -1
+  ) {
     await Tweet.findByIdAndUpdate(req.params.tweetId, {
-      $push: { likes: req.auth.user._id },
+      $push: { likes: req.auth.id },
     });
   } else {
     await Tweet.findByIdAndUpdate(req.params.tweetId, {
-      $pull: { likes: req.auth.user._id },
+      $pull: { likes: req.auth.id },
     });
   }
   return res.json(tweet);
@@ -29,11 +33,11 @@ async function update(req, res) {
 
 async function store(req, res) {
   const newTweet = new Tweet({
-    author: req.auth.user._id,
+    author: req.auth.id,
     content: req.body.content,
   });
   await newTweet.save();
-  await User.findByIdAndUpdate(req.auth.user._id, {
+  await User.findByIdAndUpdate(req.auth.id, {
     $push: { tweets: newTweet._id },
   });
   return res.json(newTweet);

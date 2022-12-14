@@ -12,8 +12,7 @@ function Tweet({ tweet }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const handleDelete = async (event) => {
-    event.preventDefault();
+  const handleDelete = async () => {
     dispatch(delete_tweet(tweet._id));
     await axios({
       url: `http://localhost:8000/tweets/${tweet._id}`,
@@ -22,9 +21,8 @@ function Tweet({ tweet }) {
     });
   };
 
-  const handleLike = async (event) => {
-    event.preventDefault();
-    dispatch(edit_tweets({ tweetId: tweet._id, user: user.user }));
+  const handleLike = async () => {
+    dispatch(edit_tweets({ tweetId: tweet._id, user: user }));
     await axios({
       url: `http://localhost:8000/tweets/${tweet._id}`,
       method: "PATCH",
@@ -60,7 +58,7 @@ function Tweet({ tweet }) {
         <div className="d-flex justify-content-between">
           <div className="d-flex">
             {_.findIndex(tweet.likes, (like) => {
-              return like._id === user.user._id;
+              return like._id === user._id;
             }) === -1 ? (
               <>
                 <img
@@ -77,8 +75,8 @@ function Tweet({ tweet }) {
                 <img
                   src={likeActive}
                   alt=""
-                  onClick={(event) => {
-                    handleLike(event);
+                  onClick={() => {
+                    handleLike();
                   }}
                 />
                 <p className="mt-3 ms-1" style={{ color: "red" }}>
@@ -87,11 +85,11 @@ function Tweet({ tweet }) {
               </>
             )}
           </div>
-          {tweet.author._id === user.user._id ? (
+          {tweet.author._id === user._id ? (
             <img
               src={deletePic}
-              onClick={(event) => {
-                handleDelete(event);
+              onClick={() => {
+                handleDelete();
               }}
               alt="delete"
               style={{ backgroundColor: "inherit", border: "none" }}

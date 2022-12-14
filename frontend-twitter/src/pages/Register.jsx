@@ -3,7 +3,7 @@ import twitter from "../images/twitter.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/userSlice";
+import { login, logout } from "../redux/userSlice";
 
 function Register() {
   const navigate = useNavigate();
@@ -151,7 +151,8 @@ function Register() {
                           to="/login"
                           style={{ color: "#040404", textDecoration: "none" }}
                         >
-                         {" "} Sign in
+                          {" "}
+                          Sign in
                         </Link>
                       </p>
                     </form>

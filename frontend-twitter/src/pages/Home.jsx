@@ -6,6 +6,7 @@ import Info from "../components/Info";
 import Tweet from "../components/Tweet";
 import "../modules/home.modules.css";
 import { add_tweet, call_tweets } from "../redux/tweetSlice";
+import { logout } from "../redux/userSlice";
 
 function Home() {
   const user = useSelector((state) => state.user);
@@ -33,7 +34,7 @@ function Home() {
       data: { content },
       headers: { Authorization: `Bearer ${user.token}` },
     });
-    dispatch(add_tweet({ content, author: { ...user.user }, likes: [] }));
+    dispatch(add_tweet({ content, author: { ...user }, likes: [] }));
     await setContent("");
   };
 
@@ -47,7 +48,7 @@ function Home() {
               <h3 className="mb-3 mt-1 d-flex justify-content-start">Home</h3>
               <div className="form-floating d-flex">
                 <img
-                  src={`http://localhost:8000/img/${user.user.avatar}`}
+                  src={`http://localhost:8000/img/${user.avatar}`}
                   className="profile-picture"
                   alt="avatar"
                 />

@@ -38,7 +38,7 @@ function Menu() {
           <img src={userForm} alt="" className="img-fluid userForm" />
           <span className="span-menu d-none d-md-block">
             <Link
-              to={`/profile/${user.user.username}`}
+              to={`/profile/${user.username}`}
               style={{ textDecoration: "none" }}
             >
               <strong>Profile</strong>
@@ -57,18 +57,18 @@ function Menu() {
         </button>
       </div>
       <div
-        onClick={handleClick}
+        onClick={() => handleClick()}
         className="d-flex justify-content-around logout mb-4"
       >
         <img
-          src={`http://localhost:8000/img/${user.user.avatar}`}
+          src={`http://localhost:8000/img/${user.avatar}`}
           alt=""
           className="img-fluid"
         />
         <div className="d-none d-md-flex flex-column justify-content-center">
-          <p className="p-0 m-0">@{user.user.username}</p>
+          <p className="p-0 m-0">@{user.username}</p>
           <p className="p-0 m-0">
-            <strong>{user.user.firstname}</strong>
+            <strong>{user.firstname}</strong>
           </p>
         </div>
         <img src={exit} alt="logout" className="img-fluid exit mt-2" />

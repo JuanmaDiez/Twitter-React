@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { follow } from "../redux/userSlice";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import _ from "lodash";
 import "../modules/followers.modules.css";
-import profile from "../images/profile.svg";
+import arrow from "../images/flecha-izquierda.png";
 import Menu from "../components/Menu";
 import Info from "../components/Info";
 
 function Followers() {
   const user = useSelector((state) => state.user);
   const params = useParams();
-  const [selectUser, setSelectUser] = useState(null);
+  const dispatch = useDispatch();
   const [profileOwner, setProfileOwner] = useState(null);
-  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -23,24 +23,18 @@ function Followers() {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setProfileOwner(response.data);
-      setToggle(false);
     };
     getData();
-  }, [toggle]);
+  }, []);
 
-  useEffect(() => {
-    if (selectUser !== null) {
-      const follow = async () => {
-        await axios({
-          url: `http://localhost:8000/users/${selectUser}`,
-          method: "PATCH",
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
-        setSelectUser(null);
-      };
-      follow();
-    }
-  }, [selectUser]);
+  const handleClick = async (id) => {
+    dispatch(follow(id));
+    await axios({
+      url: `http://localhost:8000/users/${id}`,
+      method: "PATCH",
+      headers: { Authorization: `Bearer ${user.token}` },
+    });
+  };
 
   return (
     profileOwner && (
@@ -48,11 +42,20 @@ function Followers() {
         <div className="row justify-content-center">
           <Menu />
           <div className="col-9 col-md-6 mt-1">
-            <div>
-              <h3>
-                {profileOwner.firstname} {profileOwner.lastname}
-              </h3>
-              <p> {profileOwner.username} </p>
+            <div className="d-flex justify-content-start align-items-center mt-2">
+              <Link
+                to={`/profile/${profileOwner.username}`}
+                style={{ textDecoration: "none" }}
+                className="me-3"
+              >
+                <img src={arrow} alt="arrow" />
+              </Link>
+              <div className="d-flex flex-column align-items-start">
+                <h3 className="m-0 p-0">
+                  {profileOwner.firstname} {profileOwner.lastname}
+                </h3>
+                <p>@{profileOwner.username} </p>
+              </div>
             </div>
             <div className="followers-following mb-3">
               <Link
@@ -95,12 +98,11 @@ function Followers() {
                   <button
                     className="btn follow-button w-5"
                     onClick={() => {
-                      setSelectUser(follower._id);
-                      setToggle(true);
+                      handleClick(follower._id.toString());
                     }}
                   >
-                    {_.findIndex(profileOwner.following, {
-                      username: follower.username,
+                    {_.findIndex(user.following, (following) => {
+                      return following === follower._id.toString();
                     }) === -1
                       ? "Follow"
                       : "Unfollow"}

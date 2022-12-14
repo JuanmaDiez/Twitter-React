@@ -6,6 +6,7 @@ import _ from "lodash";
 import "../modules/followers.modules.css";
 import Info from "../components/Info";
 import Menu from "../components/Menu";
+import arrow from "../images/flecha-izquierda.png";
 import { follow } from "../redux/userSlice";
 import { call_follows, unfollow } from "../redux/followSlice";
 
@@ -24,36 +25,43 @@ function Following() {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setProfileOwner(response.data);
-      await dispatch(call_follows(response.data.following));
+      dispatch(call_follows(response.data.following));
     };
     getData();
   }, []);
 
-  const handleClick = async (event, userToFollow) => {
-    event.preventDefault();
-    dispatch(follow(userToFollow));
-    if (profileOwner._id === user.user._id) {
-      dispatch(unfollow(userToFollow._id));
+  const handleClick = async (id) => {
+    dispatch(follow(id));
+    if (profileOwner._id === user._id) {
+      dispatch(unfollow(id));
     }
     await axios({
-      url: `http://localhost:8000/users/${userToFollow._id}`,
+      url: `http://localhost:8000/users/${id}`,
       method: "PATCH",
       headers: { Authorization: `Bearer ${user.token}` },
     });
   };
 
   return (
-    profileOwner &&
-     (
+    profileOwner && (
       <div className="container-fluid">
         <div className="row justify-content-center">
           <Menu />
           <div className="col-9 col-md-6">
-            <div>
-              <h3>
-                {profileOwner.firstname} {profileOwner.lastname}{" "}
-              </h3>
-              <p>@{profileOwner.username}</p>
+            <div className="d-flex justify-content-start align-items-center mt-2">
+              <Link
+                to={`/profile/${profileOwner.username}`}
+                style={{ textDecoration: "none" }}
+                className="me-3"
+              >
+                <img src={arrow} alt="arrow" />
+              </Link>
+              <div className="d-flex flex-column align-items-start">
+                <h3 className="m-0 p-0">
+                  {profileOwner.firstname} {profileOwner.lastname}
+                </h3>
+                <p>@{profileOwner.username}</p>
+              </div>
             </div>
             <div className="followers-following mb-2">
               <Link
@@ -90,11 +98,11 @@ function Following() {
                   </div>
                   <button
                     className="btn follow-button w-5"
-                    onClick={(event) => {
-                      handleClick(event, following);
+                    onClick={() => {
+                      handleClick(following._id);
                     }}
                   >
-                    {_.findIndex(user.user.following, (user) => {
+                    {_.findIndex(user.following, (user) => {
                       return user === following._id;
                     }) === -1
                       ? "Follow"

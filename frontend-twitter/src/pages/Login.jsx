@@ -12,24 +12,16 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (email !== "") {
-      const getToken = async () => {
-        try {
-          const response = await axios({
-            url: "http://localhost:8000/users/login",
-            method: "POST",
-            data: { email: email, password: password },
-          });
-          dispatch(login({ ...response.data }));
-          navigate("/");
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      getToken();
-    }
-  }, [email, password]); // Este useEffect se va a activar cuando cambien los estados de email y password. Esto se lo decimos en el Array de dependencias
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await axios({
+      url: "http://localhost:8000/users/login",
+      method: "POST",
+      data: { email: email, password: password },
+    });
+    dispatch(login({ ...response.data }));
+    navigate("/");
+  };
 
   return (
     <section className="vh-100" style={{ backgroundColor: "#0c476f" }}>
@@ -38,9 +30,17 @@ function Login() {
           <div className="col col-xl-10 h-100">
             <div className="card h-100" style={{ overflow: "hidden" }}>
               <div className="row g-0 h-100">
-                <div id="divIzq" className="col-md-6 col-lg-7 d-none d-md-flex h-100 justify-content-between">
+                <div
+                  id="divIzq"
+                  className="col-md-6 col-lg-7 d-none d-md-flex h-100 justify-content-between"
+                >
                   <img id="logoTwitter" src={twitter} alt="" />
-                  <p id="welcomeHey" className="d-flex flex-column-reverse me-2">Hey! Nice to see you again 🥰</p>
+                  <p
+                    id="welcomeHey"
+                    className="d-flex flex-column-reverse me-2"
+                  >
+                    Hey! Nice to see you again 🥰
+                  </p>
                 </div>
                 <div className="col-md-6 col-lg-5 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
@@ -48,9 +48,7 @@ function Login() {
                       action="/login"
                       method="post"
                       onSubmit={(event) => {
-                        event.preventDefault();
-                        setEmail(event.target.email.value);
-                        setPassword(event.target.password.value);
+                        handleSubmit(event);
                       }}
                     >
                       <div className="d-flex align-items-center mb-3 pb-1">
@@ -68,8 +66,10 @@ function Login() {
                           placeholder="Email or Username"
                           name="email"
                           type="text"
+                          value={email}
                           id="emailId"
                           className="form-control form-control-lg"
+                          onChange={(event) => setEmail(event.target.value)}
                           required
                         />
                       </div>
@@ -79,6 +79,8 @@ function Login() {
                           placeholder="Password"
                           name="password"
                           type="password"
+                          value={password}
+                          onChange={(event) => setPassword(event.target.value)}
                           id="passwordId"
                           className="form-control form-control-lg"
                           required
@@ -102,7 +104,10 @@ function Login() {
                         style={{ color: "#040404" }}
                       >
                         Don't have an account?{" "}
-                        <Link to="/register" style={{ color: "#040404", textDecoration: "none" }}>
+                        <Link
+                          to="/register"
+                          style={{ color: "#040404", textDecoration: "none" }}
+                        >
                           Sign up
                         </Link>
                       </p>
