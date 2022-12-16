@@ -1,0 +1,9 @@
+.tweetContainer {
+  border: solid 1px #eaeaea;
+}
+.profilePicture {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+}
+

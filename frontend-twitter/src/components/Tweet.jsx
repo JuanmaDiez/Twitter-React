@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import "../modules/tweet.modules.css";
+import styles from "../modules/Tweet.module.css";
 import like from "../images/like.svg";
 import likeActive from "../images/like-active.svg";
 import deletePic from "../images/delete.svg";
@@ -15,7 +15,7 @@ function Tweet({ tweet }) {
   const handleDelete = async () => {
     dispatch(delete_tweet(tweet._id));
     await axios({
-      url: `http://localhost:8000/tweets/${tweet._id}`,
+      url: `${process.env.REACT_APP_API_URL}/tweets/${tweet._id}`,
       method: "DELETE",
       headers: { Authorization: `Bearer ${user.token}` },
     });
@@ -24,7 +24,7 @@ function Tweet({ tweet }) {
   const handleLike = async () => {
     dispatch(edit_tweets({ tweetId: tweet._id, user: user }));
     await axios({
-      url: `http://localhost:8000/tweets/${tweet._id}`,
+      url: `${process.env.REACT_APP_API_URL}/tweets/${tweet._id}`,
       method: "PATCH",
       headers: { Authorization: `Bearer ${user.token}` },
     });
@@ -32,18 +32,18 @@ function Tweet({ tweet }) {
 
   return (
     tweet && (
-      <div className="tweet-container p-4">
+      <div className={`${styles.tweetContainer} p-4`}>
         <div className="d-flex">
           <img
-            src={`http://localhost:8000/img/${tweet.author.avatar}`}
-            className="profile-picture"
+            src={`${process.env.REACT_APP_API_URL}/img/${tweet.author.avatar}`}
+            className={`${styles.profilePicture} me-2`}
             alt="profile-picture"
           />
           <div>
             <div className="d-flex justify-content-start">
               <Link
                 to={`/profile/${tweet.author.username}`}
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: "none", color: "black" }}
               >
                 <h6>
                   {tweet.author.firstname} {tweet.author.lastname}

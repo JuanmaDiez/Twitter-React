@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import _ from "lodash";
-import "../modules/followers.modules.css";
+import styles from "../modules/Followers.module.css";
 import Info from "../components/Info";
 import Menu from "../components/Menu";
 import arrow from "../images/flecha-izquierda.png";
@@ -20,7 +20,7 @@ function Following() {
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
-        url: `http://localhost:8000/users/${params.username}/following`,
+        url: `${process.env.REACT_APP_API_URL}/users/${params.username}/following`,
         method: "get",
         headers: { Authorization: `Bearer ${user.token}` },
       });
@@ -36,7 +36,7 @@ function Following() {
       dispatch(unfollow(id));
     }
     await axios({
-      url: `http://localhost:8000/users/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/users/${id}`,
       method: "PATCH",
       headers: { Authorization: `Bearer ${user.token}` },
     });
@@ -63,31 +63,34 @@ function Following() {
                 <p>@{profileOwner.username}</p>
               </div>
             </div>
-            <div className="followers-following mb-2">
+            <div className="d-flex justify-content-around mb-2">
               <Link
                 to={`/profile/${profileOwner.username}/followers`}
-                style={{ textDecoration: "none" }}
-                className="links"
+                style={{ textDecoration: "none", color: "black" }}
+                className={`${styles.links}`}
               >
                 <strong>Followers</strong>
               </Link>
               <Link
                 to={`/profile/${profileOwner.username}/following`}
-                style={{ textDecoration: "none" }}
-                className="links location"
+                style={{ textDecoration: "none", color: "black" }}
+                className={`${styles.links} ${styles.location}`}
               >
                 <strong>Following</strong>
               </Link>
             </div>
             {follows.map((following) => {
               return (
-                <div className="tweet-container p-4 d-flex justify-content-between">
+                <div
+                  className={`${styles.followContainer} p-4 d-flex justify-content-between`}
+                  key={following._id}
+                >
                   <div className="d-flex">
                     <img
-                      src={`http://localhost:8000/img/${following.avatar}`}
+                      src={`${process.env.REACT_APP_API_URL}/img/${following.avatar}`}
                       alt="pic"
                     />
-                    <div className="tweet-inner-container">
+                    <div className="ms-2">
                       <div className="d-flex justify-content-start">
                         <h6>
                           {following.firstname} {following.lastname}
@@ -97,7 +100,7 @@ function Following() {
                     </div>
                   </div>
                   <button
-                    className="btn follow-button w-5"
+                    className={`btn ${styles.followButton} w-5`}
                     onClick={() => {
                       handleClick(following._id);
                     }}

@@ -1,9 +1,9 @@
-import "../modules/register.modules.css";
+import styles from "../modules/Register.module.css";
 import twitter from "../images/twitter.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login, logout } from "../redux/userSlice";
+import { login } from "../redux/userSlice";
 
 function Register() {
   const navigate = useNavigate();
@@ -13,32 +13,40 @@ function Register() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const response = await axios({
-      url: "http://localhost:8000/register",
+      url: `${process.env.REACT_APP_API_URL}/users`,
       method: "POST",
       data: formData,
-      headers: { "Content-Type": "mulipart/form-data" },
+      headers: { "Content-Type": "multipart/form-data" },
     });
     dispatch(login(response.data));
-    navigate("/login");
+    navigate("/");
   };
   return (
     <section style={{ backgroundColor: "#0c476f" }}>
       <div className="container py-5">
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col col-xl-10">
-            <div className="card" style={{ overflow: "hidden" }}>
+            <div className={`${styles.card}`} style={{ overflow: "hidden" }}>
               <div className="row g-0">
                 <div
-                  id="divIzq"
-                  className="col-md-6 col-lg-7 d-none d-md-flex justify-content-between"
+                  className={`${styles.leftDiv} col-md-6 col-lg-7 d-none d-md-flex justify-content-between`}
                 >
-                  <img id="logoTwitter" src={twitter} alt="" />
-                  <p id="welcome" className="d-flex flex-column-reverse me-2">
+                  <img
+                    className={`${styles.logoTwitter}`}
+                    src={twitter}
+                    alt=""
+                  />
+                  <p
+                    className={`${styles.welcome} d-flex flex-column-reverse me-2`}
+                  >
                     Hi! Welcome to Twitter Clone 👋
                   </p>
                 </div>
-                <div className="col-md-6 col-lg-5 d-flex align-items-center">
-                  <div className="card-body p-4 p-lg-5 text-black">
+                <div
+                  className="col-md-6 col-lg-5 d-flex align-items-center"
+                  style={{ backgroundColor: "white" }}
+                >
+                  <div className="p-4 p-lg-5 text-black">
                     <form
                       onSubmit={(event) => {
                         handleSubmit(event);
@@ -133,8 +141,7 @@ function Register() {
                       <div className="pt-1">
                         <div className="d-grid gap-2">
                           <button
-                            id="buttonSignUp"
-                            className="btn btn-primary border-radius 20%"
+                            className={`btn btn-primary border-radius 20% ${styles.buttonSignUp}`}
                             type="submit"
                           >
                             Sign up
@@ -143,7 +150,7 @@ function Register() {
                       </div>
 
                       <p
-                        className="SignIn mb-5 pb-lg-2"
+                        className={`${styles.signIn} mb-5 pb-lg-2`}
                         style={{ color: "#040404" }}
                       >
                         Already have an account?

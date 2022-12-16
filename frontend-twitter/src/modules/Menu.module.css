@@ -5,12 +5,7 @@
   left: 0;
   margin-top: 1rem;
 }
-
-.span-menu {
-  margin-left: 1rem;
-}
-
-.tweet-button-menu {
+.tweetButtonMenu {
   background: #1d9bf0;
   border: none;
   padding: 5px 18px 5px 18px;
@@ -24,11 +19,6 @@
   text-align: center;
   color: #ffffff;
 }
-
-a {
-  color: black;
-}
-
 .logout {
   background-color: #eaeaea;
   border-radius: 1rem;
@@ -44,4 +34,9 @@ a {
 .twitter {
   height: 24px;
   width: 24px;
+}
+.profilePicture {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
 }

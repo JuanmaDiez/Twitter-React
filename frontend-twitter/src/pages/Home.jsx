@@ -4,9 +4,8 @@ import axios from "axios";
 import Menu from "../components/Menu";
 import Info from "../components/Info";
 import Tweet from "../components/Tweet";
-import "../modules/home.modules.css";
+import styles from "../modules/Home.module.css";
 import { add_tweet, call_tweets } from "../redux/tweetSlice";
-import { logout } from "../redux/userSlice";
 
 function Home() {
   const user = useSelector((state) => state.user);
@@ -17,7 +16,7 @@ function Home() {
   useEffect(() => {
     const getData = async () => {
       const response = await axios({
-        url: "http://localhost:8000/tweets",
+        url: `${process.env.REACT_APP_API_URL}/tweets`,
         method: "GET",
         headers: { Authorization: `Bearer ${user.token}` },
       });
@@ -29,7 +28,7 @@ function Home() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios({
-      url: "http://localhost:8000/tweets",
+      url: `${process.env.REACT_APP_API_URL}/tweets`,
       method: "POST",
       data: { content },
       headers: { Authorization: `Bearer ${user.token}` },
@@ -48,8 +47,8 @@ function Home() {
               <h3 className="mb-3 mt-1 d-flex justify-content-start">Home</h3>
               <div className="form-floating d-flex">
                 <img
-                  src={`http://localhost:8000/img/${user.avatar}`}
-                  className="profile-picture"
+                  src={`${process.env.REACT_APP_API_URL}/img/${user.avatar}`}
+                  className={`${styles.profilePicture} img-fluid me-2`}
                   alt="avatar"
                 />
                 <form
@@ -69,7 +68,7 @@ function Home() {
                   ></textarea>
 
                   <div className="d-flex justify-content-end">
-                    <button className="tweet-button" type="submit">
+                    <button className={`${styles.tweetButton} mb-2`} type="submit">
                       Tweet
                     </button>
                   </div>

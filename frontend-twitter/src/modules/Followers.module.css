@@ -1,17 +1,7 @@
-.followers-following {
-  display: flex;
-  justify-content: space-around;
-}
-
-.tweet-container {
+.followContainer {
   border: solid 1px #eaeaea;
 }
-
-.tweet-inner-container {
-  margin-left: 10px;
-}
-
-.follow-button {
+.followButton {
   background: #1d9bf0;
   border: none;
   height: 30px;
@@ -26,8 +16,8 @@
   color: #ffffff;
 }
 .links {
-    width: 30%;
-    padding-bottom: 10px;
+  width: 30%;
+  padding-bottom: 10px;
 }
 .location {
   border-bottom: solid 2px #1d9bf0;

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { login } from "../redux/userSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import "../modules/login.modules.css";
+import styles from "../modules/Login.module.css";
 import twitter from "../images/twitter.png";
 
 function Login() {
@@ -15,9 +15,9 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await axios({
-      url: "http://localhost:8000/users/login",
+      url: `${process.env.REACT_APP_API_URL}/users/login`,
       method: "POST",
-      data: { email: email, password: password },
+      data: { email, password },
     });
     dispatch(login({ ...response.data }));
     navigate("/");
@@ -28,25 +28,31 @@ function Login() {
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10 h-100">
-            <div className="card h-100" style={{ overflow: "hidden" }}>
+            <div
+              className={`${styles.card} h-100`}
+              style={{ overflow: "hidden" }}
+            >
               <div className="row g-0 h-100">
                 <div
-                  id="divIzq"
-                  className="col-md-6 col-lg-7 d-none d-md-flex h-100 justify-content-between"
+                  className={`${styles.leftDiv} col-md-6 col-lg-7 d-none d-md-flex h-100 justify-content-between`}
                 >
-                  <img id="logoTwitter" src={twitter} alt="" />
+                  <img
+                    className={`${styles.logoTwitter}`}
+                    src={twitter}
+                    alt=""
+                  />
                   <p
-                    id="welcomeHey"
-                    className="d-flex flex-column-reverse me-2"
+                    className={`${styles.welcomeHey} d-flex flex-column-reverse me-2`}
                   >
                     Hey! Nice to see you again 🥰
                   </p>
                 </div>
-                <div className="col-md-6 col-lg-5 d-flex align-items-center">
-                  <div className="card-body p-4 p-lg-5 text-black">
+                <div
+                  className="col-md-6 col-lg-5 d-flex align-items-center"
+                  style={{ backgroundColor: "white" }}
+                >
+                  <div className="p-4 p-lg-5 text-black">
                     <form
-                      action="/login"
-                      method="post"
                       onSubmit={(event) => {
                         handleSubmit(event);
                       }}
@@ -90,8 +96,7 @@ function Login() {
                       <div className="pt-1 mb-4">
                         <div className="d-grid gap-2">
                           <button
-                            id="buttonSignUp"
-                            className="btn btn-primary border-radius 20%"
+                            className={`${styles.buttonSignUp} btn btn-primary border-radius 20%`}
                             type="submit"
                           >
                             Login
@@ -100,7 +105,7 @@ function Login() {
                       </div>
 
                       <p
-                        className="SignIn mb-5 pb-lg-2"
+                        className={`${styles.signIn} mb-5 pb-lg-2`}
                         style={{ color: "#040404" }}
                       >
                         Don't have an account?{" "}
