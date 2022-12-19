@@ -81,7 +81,7 @@ function Followers() {
                 >
                   <div className="d-flex">
                     <img
-                      src={`${process.env.REACT_APP_API_URL}/img/${profileOwner.avatar}`}
+                      src={`${process.env.REACT_APP_API_URL}/img/${follower.avatar}`}
                       alt="pic"
                     />
                     <div className="ms-2">

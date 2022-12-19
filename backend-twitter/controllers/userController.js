@@ -4,6 +4,11 @@ const JWT_STRING_SECRETO = process.env.JWT_STRING_SECRETO;
 const formidable = require("formidable");
 const _ = require("lodash");
 
+async function index(req, res) {
+  const users = await User.find().limit(10);
+  return res.json(users);
+}
+
 function store(req, res) {
   const form = formidable({
     multiples: true,
@@ -96,7 +101,7 @@ async function following(req, res) {
   return res.json(profileUser);
 }
 
-async function index(req, res) {
+async function show(req, res) {
   const profileUser = await User.findOne({
     username: req.params.username,
   }).populate({
@@ -111,7 +116,8 @@ module.exports = {
   store,
   followers,
   following,
-  index,
+  show,
   update,
   token,
+  index,
 };
