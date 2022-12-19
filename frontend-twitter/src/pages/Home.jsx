@@ -152,6 +152,7 @@ function Home() {
                       className={`${styles.followContainer} p-4 d-flex justify-content-between`}
                       key={suggestion._id}
                     >
+                      <h3 className="m-3">Follow someone to get started: </h3>
                       <div className="d-flex">
                         <img
                           src={`${process.env.REACT_APP_API_URL}/img/${suggestion.avatar}`}
