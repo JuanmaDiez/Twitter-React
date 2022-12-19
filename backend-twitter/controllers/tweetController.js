@@ -5,7 +5,7 @@ const _ = require("lodash");
 async function index(req, res) {
   const loggedUser = await User.findById(req.auth.id);
   const followingTweets = await Tweet.find({
-    user: { $in: loggedUser.following },
+    author: { $in: loggedUser.following },
   })
     .populate([{ path: "author" }, { path: "likes" }])
     .sort({ createdAt: "desc" })
